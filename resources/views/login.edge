@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @include('partial.head')
+        <!-- Plugins css start-->
+        <!-- Plugins css Ends-->
+    </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start-->
+    <section>         
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col-12">
+            <div class="login-card">
+              <form class="theme-form login-form">
+                <h4>Login</h4>
+                <h6>Welcome back! Log in to your account.</h6>
+                <div class="form-group">
+                  <label>Email Address</label>
+                  <div class="input-group"><span class="input-group-text"><i class="icon-email"></i></span>
+                    <input class="form-control" type="email" required="" placeholder="Test@gmail.com">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
+                    <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
+                    <div class="show-hide"><span class="show">                         </span></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="checkbox">
+                    <input id="checkbox1" type="checkbox">
+                    <label for="checkbox1">Remember password</label>
+                  </div><a class="link" href="forget-password.html">Forgot password?</a>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- page-wrapper end-->
+    <!-- latest jquery-->
+    <script src="{{ appUrl() }}/assets/js/jquery-3.5.1.min.js"></script>
+    <!-- feather icon js-->
+    <script src="{{ appUrl() }}/assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="{{ appUrl() }}/assets/js/icons/feather-icon/feather-icon.js"></script>
+    <!-- Sidebar jquery-->
+    <script src="{{ appUrl() }}/assets/js/sidebar-menu.js"></script>
+    <script src="{{ appUrl() }}/assets/js/config.js"></script>
+    <!-- Bootstrap js-->
+    <script src="{{ appUrl() }}/assets/js/bootstrap/popper.min.js"></script>
+    <script src="{{ appUrl() }}/assets/js/bootstrap/bootstrap.min.js"></script>
+    <!-- Plugins JS start-->
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="{{ appUrl() }}/assets/js/script.js"></script>
+    <!-- login js-->
+    <!-- Plugin used-->
+  </body>
+</html>
