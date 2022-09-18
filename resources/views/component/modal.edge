@@ -1,0 +1,65 @@
+<a href="" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}">KAMAR {{nomor}}</a>
+<div class="modal fade" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Kamar Hotel Nomor {{nomor}}</h5>
+        </div>
+        <div class="modal-body">
+            @if(status == 1)
+            <div class="my-2 d-flex justify-content-center">
+                <h6>Tidak ada tamu pada kamar ini</h6>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="submit" type="button">Suspend Kamar</button>
+            </div>
+            @elseif(status == 2)
+            <form class="mb-3" action="">
+                <input type="hidden" name="kamar" id="kamar" value="{{id_kamar}}">
+                <div class="mx-2">
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nama Tamu</label>
+                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Tamu">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nomor KTP</label>
+                        <input class="form-control" type="text" name="ktp" id="ktp" placeholder="Nomor KTP">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nomor Handphone</label>
+                        <input class="form-control" type="text" name="hp" id="hp" placeholder="Nomor Handphone">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Email</label>
+                        <input class="form-control" type="text" name="email" id="email" placeholder="Alamat Email">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Jumlah Hari</label>
+                        <input class="form-control" type="number" min=1 name="hari" id="hari" placeholder="Jumlah Hari Menginap">
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-6 ">
+                            <label class="col-sm-12 col-form-label">Additonal Item</label>
+                            <input class="form-control" type="text" name="item" id="item" placeholder="Item">
+                        </div>
+                        <div class="col col-sm-6 ">
+                            <label class="col-sm-12 col-form-label">Jumlah</label>
+                            <input class="form-control" type="text" name="jumlah" id="jumlah" placeholder="Jumlah Item">
+                        </div>
+                    </div>
+                    <div class="col my-3 d-flex justify-content-center">
+                        <button class="btn btn-primary btn-sm" id="addItem" type="button"><span class="fa fa-plus"></span>   Tambah Additional Item</button>
+                    </div>
+                    <div></div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" id="submit" type="button">Ubah Data</button>
+                    </div>
+                </div>
+            </form>
+            @endif
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>

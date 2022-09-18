@@ -6,22 +6,14 @@ export default class AuthController {
     }
     
     async check({ request, auth, session, response }) {
-    /**
-     * get data from form
-     */
-    const { email, password } = request.all()
-
-    /**
-     * attemp auth
-     */
-    await auth.attempt(email, password)
-
-    return email
-
+    const { username, password } = request.all()
+    // await auth.attempt(email, password)
+    console.log(username, password)
+    return response.redirect().toRoute('beranda')
     }
 
     async logout({ auth, response }) {
     await auth.logout()
-    return response.route('login.index')
+    return response.redirect().toRoute('login')
     }
 }
