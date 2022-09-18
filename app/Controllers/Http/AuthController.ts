@@ -5,7 +5,7 @@ export default class AuthController {
         return view.render('login')
     }
     
-    async check({ request, auth, session, response }) {
+    async check({ request, response }) {
     const { username, password } = request.all()
     // await auth.attempt(email, password)
     console.log(username, password)
