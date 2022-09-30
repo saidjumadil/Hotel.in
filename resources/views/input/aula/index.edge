@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include('partial.head')
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/datatables.css">
+    <!-- Plugins css Ends-->
+  </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start       -->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      
+      <!-- Page Header Start-->
+      @include('partial/header')
+      <!-- Page Header Ends -->
+      
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper sidebar-icon">
+       
+        @include('partial/nav/admin')
+
+        <div class="page-body">
+          <!-- Container-fluid starts-->
+
+          <div class="container-fluid dashboard-default-sec">
+            <div class="col-sm-6">
+              <h3>Aula Hotel</h3>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Management Data / </a><a href="{{route('input.aula')}}">Aula</a></li>
+              </ol>
+            </div>
+
+            <div class="card">
+              <div class="card-header pb-0">
+                @if(flashMessages.get('status'))
+                  <div class="col-sm-12 bg-{{flashMessages.get('status.type')}} b-r-4">
+                    <div class="alert alert-{{flashMessages.get('status.type')}} dark alert-dismissible fade show" role="alert">{{flashMessages.get('status.message')}}
+                      <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close" data-bs-original-title="" title=""></button>
+                    </div>
+                  </div>
+                @end
+                <h5>Form Aula Hotel</h5>
+              </div>
+              <form class="form theme-form" method="POST">
+                <div class="card-body">
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Deskripsi Aula</label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control btn-square" id="input-text-1" name="deskripsi" placeholder="Deskripsi Aula" data-bs-original-title="" title=""></textarea>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Harga Sewa Aula</label>
+                    <div class="col-sm-9">
+                      <input class="form-control btn-square" id="input-text-1" name="harga" type="number" placeholder="Masukkan Harga Sewa Aula" data-bs-original-title="" title="" required>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Luas Aula (m2)</label>
+                    <div class="col-sm-9">
+                      <input class="form-control btn-square" id="input-text-1" name="luas" type="number" placeholder="Masukkan Luas Aula" data-bs-original-title="" title="" required>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Jumlah Kursi</label>
+                    <div class="col-sm-9">
+                      <input class="form-control btn-square" id="input-text-1" name="kursi" type="number" placeholder="Masukkan Jumlah Kursi" data-bs-original-title="" title="" required>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Jumlah Meja</label>
+                    <div class="col-sm-9">
+                      <input class="form-control btn-square" id="input-text-1" name="meja" type="number" placeholder="Masukkan Jumlah Meja" data-bs-original-title="" title="" required>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col col-sm-4">
+                      <div class="mb-3">
+                        <div class="checkbox checkbox-success">
+                          <input id="lemari" name="proyektor" type="checkbox">
+                          <label for="lemari">Proyektor</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col col-sm-4">
+                      <div class="mb-3">
+                        <div class="checkbox checkbox-success">
+                          <input id="tv" name="layar" type="checkbox">
+                          <label for="tv">Layar Proyektor</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col col-sm-4">
+                      <div class="mb-3">
+                        <div class="checkbox checkbox-success">
+                          <input id="kulkas" name="sound" type="checkbox">
+                          <label for="kulkas">Sound System</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-end">
+                  <button class="btn btn-primary me-2 " type="submit">Edit</button>
+                  @!component('component/modal_aula',{
+                    index : 0,
+                    nomor : 'A001'
+                  })
+                </div>
+              </form>
+            </div>
+          </div>  
+          <!-- Container-fluid Ends-->
+        </div>
+
+
+
+
+        <!-- footer start-->
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- latest jquery-->
+    <script src="{{appUrl()}}/assets/js/jquery-3.5.1.min.js"></script>
+    <!-- feather icon js-->
+    <script src="{{appUrl()}}/assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/icons/feather-icon/feather-icon.js"></script>
+    <!-- Sidebar jquery-->
+    <script src="{{appUrl()}}/assets/js/sidebar-menu.js"></script>
+    <script src="{{appUrl()}}/assets/js/config.js"></script>
+    <!-- Bootstrap js-->
+    <script src="{{appUrl()}}/assets/js/bootstrap/popper.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/bootstrap/bootstrap.min.js"></script>
+    <!-- Plugins JS start-->
+    <script src="{{appUrl()}}/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/datatable/datatables/datatable.custom.js"></script>
+    <script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="{{appUrl()}}/assets/js/script.js"></script>
+    {{--  <script src="{{appUrl()}}/assets/js/theme-customizer/customizer.js"></script>  --}}
+    <!-- login js-->
+    <!-- Plugin used-->
+  </body>
+</html>

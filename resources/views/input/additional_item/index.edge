@@ -47,9 +47,13 @@
                   </div>
                 @end
                 <div class="col mb-3 text-end">
-                  <a href="{{route('input.additional_item.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Item</a>
+                  {{--  <a href="{{route('input.additional_item.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Item</a>  --}}
+                  @!component('component/modal_addItem',{
+                    index : 0,
+                    nomor : 'A001'
+                  })
                 </div>
-                <div class="card-block row">
+                <div class="card-block mt-3 row">
                       <div class="col-sm-12 col-lg-12 col-xl-12">
                           <div class="table-responsive">
                               <table class="display table-bordered" id="basic-1">
@@ -78,21 +82,9 @@
                                     </tr>
                                     <tr>
                                       <th scope="col">2</th>
-                                      <td>Minuman</td>
+                                      <td>Air Mineral</td>
                                       <td>Rp 10.000</td>
-                                      <td>50</td>
-                                      <td style="text-align:center">
-                                        <button class="btn btn-warning" id="" type="button">Edit</button>
-                                      </td>
-                                      <td style="text-align:center">
-                                        <button class="btn btn-danger" id="" type="button">Hapus</button>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="col">3</th>
-                                      <td>Aula</td>
-                                      <td>Rp 350.000</td>
-                                      <td>2</td>
+                                      <td>1000</td>
                                       <td style="text-align:center">
                                         <button class="btn btn-warning" id="" type="button">Edit</button>
                                       </td>

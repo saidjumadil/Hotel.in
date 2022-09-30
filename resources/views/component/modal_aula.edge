@@ -1,0 +1,42 @@
+<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button">Booking</button>
+<div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+            <h5 class="modal-title">Form Booking Aula</h5>
+        </div>
+        <div class="modal-body">
+            <form class="mb-3" action="">
+                <div class="mx-3">
+                    <div class="row">
+                        <div class="col col-sm-6 ">
+                            <label class="col-sm-12 col-form-label">Tanggal Mulai</label>
+                            <input class="form-control" type="date" name="mulai" id="mulai" placeholder="">
+                        </div>
+                        <div class="col col-sm-6 ">
+                            <label class="col-sm-12 col-form-label">Tanggal Berakhir</label>
+                            <input class="form-control" type="date" name="akhir" id="akhir" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Total Pembayaran</label>
+                        <input class="form-control" type="number" name="bayar" id="bayar" placeholder="Total Harga Pembayaran">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Jenis Pembayaran</label>
+                        <select class="form-control" name="jenis" id="jenis" placeholder="Jenis Pembayaran">
+                            <option value=1>Tunai</option>
+                            <option value=2>Transfer</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer mt-3">
+                        <button class="btn btn-success" id="submit" type="button">Booking Aula</button>
+                    </div>
+                </div>
+            </form>
+            {{--  <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+            </div>  --}}
+        </div>
+    </div>
+</div>

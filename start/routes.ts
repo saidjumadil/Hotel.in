@@ -39,10 +39,15 @@ Route.group(() => {
     Route.get('tipe-kamar/add', 'Input/TipeKamarsController.add').as('tipe_kamar.add')
     Route.post('tipe-kamar/add', 'Input/TipeKamarsController.post').as('tipe_kamar.post')
 
+    //Aula
+    Route.get('aula', 'Input/AulasController.index').as('aula')
+    Route.get('aula/add', 'Input/AulasController.add').as('aula.add')
+    Route.post('aula/add', 'Input/AulasController.post').as('aula.post')
+
     //additonal item
     Route.get('additional-item', 'Input/AdditionalItemsController.index').as('additional_item')
     Route.get('additional-item/add', 'Input/AdditionalItemsController.add').as('additional_item.add')
-    Route.post('additional-item/add', 'Input/AdditionalItemsController.post').as('additional_item.post')
+    Route.post('additional-item', 'Input/AdditionalItemsController.post').as('additional_item.post')
 }).prefix('input').as('input')
 
 Route.group(() => {
