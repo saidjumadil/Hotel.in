@@ -63,10 +63,9 @@
                         <label for="input-text-1">Tipe Kamar</label>
                         <select class="form-control btn-square" id="input-text-1" name="tipe" data-bs-original-title="" title="" required>
                           <option value=> -- Pilih Tipe Kamar -- </option>
-                          <option value=1>Tipe 1</option>
-                          <option value=2>Tipe 2</option>
-                          <option value=3>Tipe 3</option>
-                          <option value=4>Tipe 4</option>
+                          @each(item in tipe)
+                            <option value={{item.id}}>Tipe {{item.tipe}}</option>
+                          @endeach
                         </select>
                       </div>
                     </div>

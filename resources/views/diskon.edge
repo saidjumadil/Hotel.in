@@ -33,7 +33,7 @@
             <div class="col-sm-6">
               <h3>List Kamar Hotel</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Management Data / </a><a href="{{route('input.kamar')}}">Kamar</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="{{route('diskon')}}">Management Diskon</a></li>
               </ol>
             </div>
 
@@ -47,47 +47,41 @@
                   </div>
                 @end
                 <div class="col mb-3 text-end">
-                  <a href="{{route('input.kamar.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Kamar</a>
+                  @!component('component/modal/add_diskon')
                 </div>
-                <div class="card-block row">
+                <div class="card-block row mt-4">
                       <div class="col-sm-12 col-lg-12 col-xl-12">
                           <div class="table-responsive">
                               <table class="display table-bordered" id="basic-1">
                                   <thead class="table-primary">
                                       <tr>
                                           <th scope="col" style="width:20px">No</th>
-                                          <th scope="col">Nomor Kamar</th>
-                                          <th scope="col">Tipe Kamar</th>
-                                          <th scope="col">Lantai</th>
+                                          <th scope="col">Nama Diskon</th>
+                                          <th scope="col">Rentan Tanggal</th>
+                                          <th scope="col">Potongan Harga</th>
                                           <th scope="col"></th>
                                           <th scope="col"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    @each((item, index) in kamars)
+                                    @each((item, index) in diskon)
                                       <tr>
                                         <th scope="col">{{index + 1}}</th>
-                                        <td>
-                                          @!component('component/modal', {
-                                            index : index + 1,
-                                            nomor : item.nomor,
-                                            tipe_kamar : item.detail,
-                                            status: item.status
+                                        <td>{{item.nama}}</td>
+                                        <td>{{date(item.mulai)}} - {{date(item.akhir)}}</td>
+                                        <td>Rp. {{item.potong}}</td>
+                                        <td style="text-align:center">
+                                          @!component('component/modal/edit_diskon', {
+                                            "index" : index + 1,
+                                            id : item.id,
+                                            nama : item.nama,
+                                            mulai : tanggal(item.mulai),
+                                            akhir : tanggal(item.akhir),
+                                            potong : item.potong
                                           })
                                         </td>
-                                        <td>Tipe {{item.nama_tipe}}</td>
-                                        <td>{{item.lantai}}</td>
                                         <td style="text-align:center">
-                                          <form action="{{route('input.kamar.edit')}}" method="get">
-                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
-                                            <button class="btn btn-warning" id="" type="submit">Edit</button>
-                                          </form>
-                                        </td>
-                                        <td style="text-align:center">
-                                          <form action="{{route('input.kamar.hapus')}}" method="get">
-                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
-                                            <button class="btn btn-danger" id="" type="submit">Hapus</button>
-                                          </form>
+                                          <button class="btn btn-danger" id="" type="button">Hapus</button>
                                         </td>
                                       </tr>
                                     @endeach

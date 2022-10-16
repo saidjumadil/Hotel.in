@@ -1,12 +1,9 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class TipeKamar extends BaseModel {
+export default class Aula extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-
-  @column()
-  public tipe: string
 
   @column()
   public deskripsi: string
@@ -15,25 +12,25 @@ export default class TipeKamar extends BaseModel {
   public harga: number
 
   @column()
-  public luas_kamar: number
+  public luas: number
 
   @column()
-  public luas_mandi: number
+  public kursi: number
 
   @column()
-  public tempat_tidur: number
+  public meja: number
 
   @column()
-  public lemari: number
+  public layar: number
 
   @column()
-  public kulkas: number
+  public proyektor: number
 
   @column()
-  public tv: number
+  public sound: number
 
   @column()
-  public interior: number
+  public status: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

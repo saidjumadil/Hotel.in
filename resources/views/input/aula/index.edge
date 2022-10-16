@@ -53,68 +53,80 @@
                   <div class="mb-3 row">
                     <label class="col-sm-3" for="input-text-1">Deskripsi Aula</label>
                     <div class="col-sm-9">
-                      <textarea class="form-control btn-square" id="input-text-1" name="deskripsi" placeholder="Deskripsi Aula" data-bs-original-title="" title=""></textarea>
+                      <textarea class="form-control btn-square" id="input-text-1" name="deskripsi" placeholder="Masukkan Deskripsi Aula" data-bs-original-title="" title="" value="{{aula.deskripsi}}">{{aula.deskripsi}}</textarea>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label class="col-sm-3" for="input-text-1">Harga Sewa Aula</label>
                     <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="harga" type="number" placeholder="Masukkan Harga Sewa Aula" data-bs-original-title="" title="" required>
+                      <input class="form-control btn-square" id="input-text-1" name="harga" type="number" placeholder="Masukkan Harga Sewa Aula" data-bs-original-title="" title="" value="{{aula.harga}}" required>
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label class="col-sm-3" for="input-text-1">Luas Aula (m2)</label>
                     <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="luas" type="number" placeholder="Masukkan Luas Aula" data-bs-original-title="" title="" required>
+                      <input class="form-control btn-square" id="input-text-1" name="luas" type="number" placeholder="Masukkan Luas Aula" data-bs-original-title="" title="" required value="{{aula.luas}}">
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label class="col-sm-3" for="input-text-1">Jumlah Kursi</label>
                     <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="kursi" type="number" placeholder="Masukkan Jumlah Kursi" data-bs-original-title="" title="" required>
+                      <input class="form-control btn-square" id="input-text-1" name="kursi" type="number" placeholder="Masukkan Jumlah Kursi" data-bs-original-title="" title="" required value="{{aula.kursi}}">
                     </div>
                   </div>
                   <div class="mb-3 row">
                     <label class="col-sm-3" for="input-text-1">Jumlah Meja</label>
                     <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="meja" type="number" placeholder="Masukkan Jumlah Meja" data-bs-original-title="" title="" required>
+                      <input class="form-control btn-square" id="input-text-1" name="meja" type="number" placeholder="Masukkan Jumlah Meja" data-bs-original-title="" title="" required value="{{aula.meja}}">
                     </div>
                   </div>
                   <div class="row mt-2">
                     <div class="col col-sm-4">
                       <div class="mb-3">
                         <div class="checkbox checkbox-success">
-                          <input id="lemari" name="proyektor" type="checkbox">
-                          <label for="lemari">Proyektor</label>
+                          @if(aula.proyektor)
+                            <input id="proyektor" name="proyektor" type="checkbox" value=1 checked>
+                          @else
+                            <input id="proyektor" name="proyektor" type="checkbox" value=1>
+                          @endif
+                          <label for="proyektor">Proyektor</label>
                         </div>
                       </div>
                     </div>
                     <div class="col col-sm-4">
                       <div class="mb-3">
                         <div class="checkbox checkbox-success">
-                          <input id="tv" name="layar" type="checkbox">
-                          <label for="tv">Layar Proyektor</label>
+                          @if(aula.layar)
+                            <input id="layar" name="layar" type="checkbox" value=1 checked>
+                          @else
+                          <input id="layar" name="layar" type="checkbox" value=1>
+                          @endif
+                          <label for="layar">Layar Proyektor</label>
                         </div>
                       </div>
                     </div>
                     <div class="col col-sm-4">
                       <div class="mb-3">
                         <div class="checkbox checkbox-success">
-                          <input id="kulkas" name="sound" type="checkbox">
-                          <label for="kulkas">Sound System</label>
+                          @if(aula.sound)
+                            <input id="sound" name="sound" type="checkbox" value=1 checked>
+                          @else
+                            <input id="sound" name="sound" type="checkbox" value=1>
+                          @endif
+                          <label for="sound">Sound System</label>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="card-footer text-end">
+                <div class="card-footer d-flex justify-content-between">
                   <button class="btn btn-primary me-2 " type="submit">Edit</button>
+              </form>
                   @!component('component/modal_aula',{
                     index : 0,
                     nomor : 'A001'
                   })
                 </div>
-              </form>
             </div>
           </div>  
           <!-- Container-fluid Ends-->

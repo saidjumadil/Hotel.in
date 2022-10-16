@@ -3,6 +3,8 @@
   <head>
     @include('partial.head')
         <!-- Plugins css start-->
+        <link rel="stylesheet" type="text/css" href="../assets/css/owlcarousel.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/photoswipe.css">
         <!-- Plugins css Ends-->
   </head>
   <body>
@@ -42,22 +44,106 @@
                 <li class="breadcrumb-item">Djarwal / <a href="{{route('beranda')}}">Beranda</a></li>
               </ol>
             </div>
-        
+
             <div class="row">
               <div class="col-sm-12 col-xl-12">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card o-hidden border-0">
+                      <div class="bg-success b-r-4 card-body">
+                        <div class="media static-top-widget">
+                          <div class="align-self-center text-center"><i data-feather="map"></i></div>
+                          <div class="media-body"><span class="m-0">Kamar Available</span>
+                            <h4 class="mb-0 counter">{{kosong}}</h4><i class="icon-bg" data-feather="map"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card o-hidden border-0">
+                      <div class="bg-danger b-r-4 card-body">
+                        <div class="media static-top-widget">
+                          <div class="align-self-center text-center"><i data-feather="box"></i></div>
+                          <div class="media-body"><span class="m-0">Kamar Unvailable</span>
+                            <h4 class="mb-0 counter">{{isi}}</h4><i class="icon-bg" data-feather="box"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="card">
-                  <div class="card-header d-flex justify-content-between align-items-center pb-0">
-                    <h5>Djarwal Management Hotel Application</h5>   
+                  <div class="card-header d-flex justify-content-center align-items-center pb-0">
+                    <h3>List Status Kamar Hotel</h3>   
                   </div>
                   <div class="card-body">
-                    <p class="mb-0">
-                      Aplikasi ini adalah aplikasi management data dan Resepsional untuk Hotel Djarwal. Aplikasi ini mengatur data kamar, tipe kamar, additional item pada hotel. Aplikasi ini juga mengatur proses respsi tamu secara menyeluruh dan dapat menganalisa data tersebut dalam bentuk data dan juga diagram.
-                    </p>
+                    <div class="row">
+                      @each(item in kamar)
+                      @set('i', {status : "success", title : "Status Kamar Available", message : "Kamar Ini Kosong", avail : "Available", card : "primary"})
+
+                        @!component('component/box/box1', {
+                          kamar : item.nomor,
+                          tipe : item.nama_tipe,
+                          status : i.status,
+                          title : i.title,
+                          message : i.message,
+                          avail : i.avail,
+                          card : i.card
+                        })
+                      @endeach
+                      @!component('component/box/box1', {
+                        kamar : "A0002",
+                        tipe : "1",
+                        status : "danger",
+                        title : "Status Kamar Unavailable",
+                        message : "Nama : Zulkifli <br/> Check Out : 27 Sept 2022",
+                        avail : "Unavailable",
+                        card : "secondary"
+                      })
+                      @!component('component/box/box1', {
+                        kamar : "A0003",
+                        tipe : "1",
+                        status : "success",
+                        title : "Status Kamar Available",
+                        message : "Kamar Ini Kosong",
+                        avail : "Available",
+                        card : "primary"
+                      })
+                      @!component('component/box/box1', {
+                        kamar : "A0004",
+                        tipe : "2",
+                        status : "success",
+                        title : "Status Kamar Available",
+                        message : "Kamar Ini Kosong",
+                        avail : "Available",
+                        card : "primary"
+                      })
+                      @!component('component/box/box1', {
+                        kamar : "A0005",
+                        tipe : "2",
+                        status : "danger",
+                        title : "Status Kamar Unavailable",
+                        message : "Nama : Malik Esensial <br/> Check Out : 27 Sept 2022",
+                        avail : "Unavailable",
+                        card : "secondary"
+                      })
+                      @!component('component/box/box1', {
+                        kamar : "A0006",
+                        tipe : "2",
+                        status : "danger",
+                        title : "Status Kamar Unavailable",
+                        message : "Nama : Malik Esensial <br/> Check Out : 27 Sept 2022",
+                        avail : "Unavailable",
+                        card : "secondary"
+                      })
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>   
+          
           <!-- Container-fluid Ends-->
         </div>
 
@@ -89,7 +175,11 @@
     <!-- Plugins JS start-->
     <script src="../assets/js/chart/apex-chart/apex-chart.js"></script>
     <script src="../assets/js/chart/apex-chart/stock-prices.js"></script>
-    <script src="../assets/js/chart/apex-chart/chart-custom.js"></script>
+    <script src="../assets/js/chart/apex-chart/chart-custom.js"></script>    
+    <script src="../assets/js/popover-custom.js"></script>
+    <script src="../assets/js/photoswipe/photoswipe.min.js"></script>
+    <script src="../assets/js/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="../assets/js/photoswipe/photoswipe.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="../assets/js/script.js"></script>

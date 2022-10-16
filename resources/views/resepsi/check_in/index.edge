@@ -64,42 +64,21 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <th scope="col">1</th>
-                                      <td>KAMAR A001</td>
-                                      <td>Tipe 1</td>
-                                      <td>Rp 250.000</td>
-                                      <td style="text-align:center">
-                                        @!component('component/modal_check_in',{
-                                          index : 0,
-                                          nomor : 'A001'
-                                        })
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="col">2</th>
-                                      <td>KAMAR A002</td>
-                                      <td>Tipe 1</td>
-                                      <td>Rp 250.000</td>
-                                      <td style="text-align:center">
-                                        @!component('component/modal_check_in',{
-                                          index : 1,
-                                          nomor : 'A002'
-                                        })
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="col">3</th>
-                                      <td>KAMAR A003</td>
-                                      <td>Tipe 2</td>
-                                      <td>Rp 280.000</td>
-                                      <td style="text-align:center">
-                                        @!component('component/modal_check_in',{
-                                          index : 2,
-                                          nomor : 'A003'
-                                        })
-                                      </td>
-                                    </tr>
+                                    @each((item, index) in kamar)
+                                      <tr>
+                                        <th scope="col">{{index + 1}}</th>
+                                        <td>KAMAR {{item.nomor}}</td>
+                                        <td>Tipe {{item.nama_tipe}}</td>
+                                        <td>Rp {{item.harga}}</td>
+                                        <td style="text-align:center">
+                                          @!component('component/modal_check_in',
+                                          {
+                                            index : index + 1,
+                                            nomor : item.nomor
+                                          })
+                                        </td>
+                                      </tr>
+                                    @endeach
                                   </tbody>
                               </table>
                           </div>
@@ -124,6 +103,45 @@
         </footer>
       </div>
     </div>
+    
+    <script>
+      const addItem = document.querySelectorAll('#addItem')
+      const additional = document.querySelectorAll('#additional')
+
+      for(let index in addItem){
+        addItem[index].addEventListener('click', res => {
+          additional[index].innerHTML += 
+          `
+          <div class="row" id="itemAdd">
+              <div class="col col-sm-5">
+                  <label class="col-sm-12 col-form-label">Additonal Item</label>
+                  <input class="form-control" type="text" name="item" id="item" placeholder="Item">
+              </div>
+              <div class="col col-sm-5">
+                  <label class="col-sm-12 col-form-label">Jumlah</label>
+                  <input class="form-control" type="number" name="jumlah" id="jumlah" placeholder="Jumlah Item">
+              </div>
+              <div class="col col-sm-2 d-flex align-items-end">
+                <button type="button" id="hapus" class="btn btn-danger btn-lg"><span class="icon-close"></span></button>
+              </div>
+          </div>
+          `
+          deleteItem()
+        })
+      }
+
+      function deleteItem(){
+        const itemAdd = document.querySelectorAll('#itemAdd')
+        const hapus = document.querySelectorAll('#hapus')
+
+        for (let index in itemAdd){
+          hapus[index].addEventListener('click', res => {
+            itemAdd[index].remove()
+          })
+        }
+      }
+
+    </script>
     <!-- latest jquery-->
     <script src="{{appUrl()}}/assets/js/jquery-3.5.1.min.js"></script>
     <!-- feather icon js-->

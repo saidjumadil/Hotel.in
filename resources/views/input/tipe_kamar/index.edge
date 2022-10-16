@@ -57,7 +57,7 @@
                                   <tr>
                                       <th scope="col">No</th>
                                       <th scope="col">Tipe Kamar</th>
-                                      <th scope="col">Harga</th>
+                                      <th scope="col">Rate Kamar</th>
                                       <th scope="col" style="width:50px">Deskripsi</th>
                                       <th scope="col">Luas Ruangan (Meter Persegi)</th>
                                       <th scope="col">Luas Kamar Mandi (Meter Persegi)</th>
@@ -71,82 +71,46 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <th scope="col">1</th>
-                                  <td>Tipe 1</td>
-                                  <td>Rp 250.000</td>
-                                  <td style="width: 90px;">Kamar tipe ini memuat design simple dengan warna tembok putih dan dilengkapi interior yang elegan</td>
-                                  <td>12</td>
-                                  <td>6</td>
-                                  <td>Single Bed</td>
-                                  <td>Ada</td>
-                                  <td>Tidak Ada</td>
-                                  <td>Ada</td>
-                                  <td></td>
-                                  <td>
-                                    <button class="btn btn-warning" id="" type="button">Edit</button>
-                                  </td>
-                                  <td>
-                                    <button class="btn btn-danger" id="" type="button">Hapus</button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="col">2</th>
-                                  <td>Tipe 2</td>
-                                  <td>Rp 280.000</td>
-                                  <td style="width: 90px;">Kamar tipe ini memuat design simple dengan warna tembok putih dan dilengkapi interior yang elegan</td>
-                                  <td>16</td>
-                                  <td>6</td>
-                                  <td>Single Bed</td>
-                                  <td>Ada</td>
-                                  <td>Tidak Ada</td>
-                                  <td>Ada</td>
-                                  <td>Meja, kursi</td>
-                                  <td>
-                                    <button class="btn btn-warning" id="" type="button">Edit</button>
-                                  </td>
-                                  <td>
-                                    <button class="btn btn-danger" id="" type="button">Hapus</button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="col">3</th>
-                                  <td>Tipe 3</td>
-                                  <td>Rp 350.000</td>
-                                  <td style="width: 90px;">Kamar tipe ini memuat design simple dengan warna tembok putih dan dilengkapi interior yang elegan</td>
-                                  <td>16</td>
-                                  <td>6</td>
-                                  <td>Double Bed</td>
-                                  <td>Ada</td>
-                                  <td>Ada</td>
-                                  <td>Ada</td>
-                                  <td>Meja, kursi</td>
-                                  <td>
-                                    <button class="btn btn-warning" id="" type="button">Edit</button>
-                                  </td>
-                                  <td>
-                                    <button class="btn btn-danger" id="" type="button">Hapus</button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="col">4</th>
-                                  <td>Tipe 4</td>
-                                  <td>Rp 380.000</td>
-                                  <td style="width: 90px;">Kamar tipe ini memuat design simple dengan warna tembok putih dan dilengkapi interior yang elegan</td>
-                                  <td>20</td>
-                                  <td>8</td>
-                                  <td>Double Bed</td>
-                                  <td>Ada</td>
-                                  <td>Ada</td>
-                                  <td>Ada</td>
-                                  <td>Meja, kursi</td>
-                                  <td>
-                                    <button class="btn btn-warning" id="" type="button">Edit</button>
-                                  </td>
-                                  <td>
-                                    <button class="btn btn-danger" id="" type="button">Hapus</button>
-                                  </td>
-                                </tr>
+                                @set('bed', ['', 'Single Bed', 'Queen Bed', 'King Bed', 'Twin Bed'])
+                                @set('ada', ['Tidak Ada', 'Ada'])
+                                @each((item, index) in tipe)
+                                  @set('interior', item.interior.split(','))
+                                  <tr>
+                                    <th scope="col">{{index + 1}}</th>
+                                    <td>Tipe {{item.tipe}}</td>
+                                    <td>Rp {{item.harga}}</td>
+                                    <td style="width: 90px;">{{item.deskripsi}}</td>
+                                    <td>{{item.luas_kamar}}</td>
+                                    <td>{{item.luas_mandi}}</td>
+                                    <td>{{bed[item.tempat_tidur]}}</td>
+                                    <td>{{ada[item.lemari]}}</td>
+                                    <td>{{ada[item.tv]}}</td>
+                                    <td>{{ada[item.kulkas]}}</td>
+                                    @if(interior[0] == '')
+                                      <td>Tidak Ada Interior</td>
+                                    @else
+                                      <td style="padding-left:30px">
+                                        <ul style="list-style-type:disc">
+                                          @each(inter in interior)
+                                            <li>{{inter}}</li>
+                                          @endeach
+                                        </ul>
+                                      </td>
+                                    @endif
+                                    <td>
+                                      <form action="{{route('input.tipe_kamar.edit')}}" method="get">
+                                        <input type="hidden" name="id" value="{{item.id}}">
+                                        <button class="btn btn-warning" id="edit" type="submit">Edit</button>
+                                      </form>
+                                    </td>
+                                    <td>
+                                      <form action="{{route('input.tipe_kamar.hapus')}}" method="get">
+                                        <input type="hidden" name="id" value="{{item.id}}">
+                                        <button class="btn btn-danger" id="hapus" type="submit">Hapus</button>
+                                      </form>
+                                    </td>
+                                  </tr>
+                                @endeach
                               </tbody>
                           </table>
                           </div>

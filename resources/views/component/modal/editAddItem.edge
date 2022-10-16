@@ -1,17 +1,18 @@
-<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button"><span class="fa fa-plus"></span>    Tambah Additional Item</button>
+<button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button">Edit</button>
 <div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="text-align:left">
         <div class="modal-header">
-            <h5 class="modal-title">Form Tambah Additional Item</h5>
+            <h5 class="modal-title">Form Edit Additional Item</h5>
         </div>
         <div class="modal-body">
-            <form class="form theme-form mx-3" method="POST">
+            <form class="form theme-form mx-3" action="{{route('input.additional_item.editPost')}}" method="POST">
+              <input type="hidden" name="id" id="id" value="{{id}}">
                 <div class="row">
                   <div class="col">
                     <div class="mb-3">
                       <label for="input-text-1">Nama Item</label>
-                      <input class="form-control btn-square" id="input-text-1" name="nama" type="text" placeholder="Masukkan Nama Item" data-bs-original-title="" title="">
+                      <input class="form-control btn-square" id="input-text-1" name="nama" value="{{nama}}" type="text" placeholder="Masukkan Nama Item" data-bs-original-title="" title="">
                     </div>
                   </div>
                 </div>
@@ -19,7 +20,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label for="input-text-1">Harga</label>
-                      <input class="form-control btn-square" id="input-text-1" name="harga" type="number" placeholder="Harga Item" data-bs-original-title="" title="">
+                      <input class="form-control btn-square" id="input-text-1" name="harga" value="{{harga}}" type="number" placeholder="Harga Item" data-bs-original-title="" title="">
                     </div>
                   </div>
                 </div>
@@ -27,12 +28,12 @@
                   <div class="col">
                     <div class="mb-3">
                       <label for="input-text-1">Jumlah Stock</label>
-                      <input class="form-control btn-square" id="input-text-1" name="jumlah" type="number" placeholder="Stock Item" data-bs-original-title="" title="">
+                      <input class="form-control btn-square" id="input-text-1" name="jumlah" value="{{jumlah}}" type="number" placeholder="Stock Item" data-bs-original-title="" title="">
                     </div>
                   </div>
                 </div>
                 <div class="text-end">
-                  <button class="btn btn-primary" type="submit">Submit</button>
+                  <button class="btn btn-secondary" type="submit">Edit</button>
                 </div>
               </form>
             {{--  <div class="modal-footer">

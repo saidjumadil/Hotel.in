@@ -31,14 +31,13 @@
 
           <div class="container-fluid dashboard-default-sec">
             <div class="col-sm-6">
-              <h3>List Additional Item</h3>
+              <h3>Tambah Kamar</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Management Data / </a><a href="{{route('input.kamar')}}">Additional  Item</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Management Data / </a><a href="{{route('input.kamar')}}">Kamar / </a><a href="{{route('input.kamar.edit')}}">Edit</a></li>
               </ol>
             </div>
-
             <div class="card">
-              <div class="card-header">
+              <div class="card-header pb-0">
                 @if(flashMessages.get('status'))
                   <div class="col-sm-12 bg-{{flashMessages.get('status.type')}} b-r-4">
                     <div class="alert alert-{{flashMessages.get('status.type')}} dark alert-dismissible fade show" role="alert">{{flashMessages.get('status.message')}}
@@ -46,54 +45,57 @@
                     </div>
                   </div>
                 @end
-                <div class="col mb-3 text-end">
-                  {{--  <a href="{{route('input.additional_item.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Item</a>  --}}
-                  @!component('component/modal_addItem')
-                </div>
-                <div class="card-block mt-3 row">
-                      <div class="col-sm-12 col-lg-12 col-xl-12">
-                          <div class="table-responsive">
-                              <table class="display table-bordered" id="basic-1">
-                                  <thead class="table-primary">
-                                      <tr>
-                                          <th scope="col" style="width:20px">No</th>
-                                          <th scope="col">Nama Item</th>
-                                          <th scope="col">Tambahan Harga</th>
-                                          <th scope="col">Jumlah yang tersedia</th>
-                                          <th scope="col"></th>
-                                          <th scope="col"></th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                    @each((item, index) in additional)
-                                      <tr>
-                                        <th scope="col">{{index + 1}}</th>
-                                        <td>{{item.nama}}</td>
-                                        <td>Rp {{item.harga}}</td>
-                                        <td>{{item.jumlah}}</td>
-                                        <td style="text-align:center">
-                                          @!component('component/modal/editAddItem',{
-                                            index: index + 1,
-                                            id: item.id,
-                                            nama: item.nama,
-                                            harga: item.harga,
-                                            jumlah: item.jumlah
-                                          })
-                                        </td>
-                                        <td style="text-align:center">
-                                          <form action="{{route('input.additional_item.hapus')}}" method="get">
-                                            <input type="hidden" name="id" value="{{item.id}}">
-                                            <button class="btn btn-danger" id="" type="submit">Hapus</button>
-                                          </form>
-                                        </td>
-                                      </tr>
-                                    @endeach
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
+                <h5>Form Tambah Kamar</h5>
               </div>
+              <form class="form theme-form" method="POST">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="input-text-1">Nomor Kamar</label>
+                        <input class="form-control btn-square" id="input-text-1" name="nomor" value="{{kamar.nomor}}" type="text" placeholder="Masukkan Nomor Kamar" data-bs-original-title="" title="" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="input-text-1">Tipe Kamar</label>
+                        <select class="form-control btn-square" id="input-text-1" name="tipe" data-bs-original-title="" title="" required>
+                          <option value=> -- Pilih Tipe Kamar -- </option>
+                          @each(item in tipe)
+                            @if(item.id == kamar.tipe)
+                              <option value={{item.id}} selected>Tipe {{item.tipe}}</option>
+                            @else
+                              <option value={{item.id}}>Tipe {{item.tipe}}</option>
+                            @endif
+                          @endeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        @set('lantai', ['-- Pilih Lantai --', 'Lantai 1', 'Lantai 2', 'Lantai 3'])
+                        <label for="input-text-1">Lantai Kamar</label>
+                        <select class="form-control btn-square" id="input-text-1" name="lantai" data-bs-original-title="" title="" required>
+                          @each((item, index) in lantai)
+                            @if(index == kamar.lantai)
+                              <option value={{index}} selected>{{item}}</option>
+                            @else
+                              <option value={{index}}>{{item}}</option>
+                            @endif
+                          @endeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-end">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+              </form>
             </div>
           </div>  
           <!-- Container-fluid Ends-->

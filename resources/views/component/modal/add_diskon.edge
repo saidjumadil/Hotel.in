@@ -1,14 +1,18 @@
-<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button">Booking</button>
+<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button"><span class="fa fa-plus"></span> Tambah Diskon</button>
 <div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="text-align:left">
         <div class="modal-header">
-            <h5 class="modal-title">Form Booking Aula</h5>
+            <h5 class="modal-title">Form Tambah Diskon</h5>
         </div>
         <div class="modal-body">
-            <form class="mb-3" action="{{route('input.aula.booking')}}">
+            <form class="mb-3" method="POSt">
                 <div class="mx-3">
                     <div class="row">
+                        <div class="col col-sm-12 ">
+                            <label class="col-sm-12 col-form-label">Nama Diskon</label>
+                            <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Diskon">
+                        </div>
                         <div class="col col-sm-6 ">
                             <label class="col-sm-12 col-form-label">Tanggal Mulai</label>
                             <input class="form-control" type="date" name="mulai" id="mulai" placeholder="">
@@ -19,18 +23,11 @@
                         </div>
                     </div>
                     <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Total Pembayaran</label>
-                        <input class="form-control" type="number" name="bayar" id="bayar" placeholder="Total Harga Pembayaran">
+                        <label class="col-sm-12 col-form-label">Potongan Harga</label>
+                        <input class="form-control" type="number" name="potong" id="potong" placeholder="Potongan Harga">
                     </div>
-                    <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Jenis Pembayaran</label>
-                        <select class="form-control" name="jenis" id="jenis" placeholder="Jenis Pembayaran">
-                            <option value=1>Tunai</option>
-                            <option value=2>Transfer</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer mt-3">
-                        <button class="btn btn-success" id="submit" type="submit">Booking Aula</button>
+                    <div class="mt-3 text-end">
+                        <button class="btn btn-success btn-sm" id="submit" type="submit">Tambah</button>
                     </div>
                 </div>
             </form>

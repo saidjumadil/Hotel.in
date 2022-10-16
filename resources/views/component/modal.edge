@@ -7,59 +7,101 @@
         </div>
         <div class="modal-body">
             @if(status == 1)
-            <div class="my-2 d-flex justify-content-center">
-                <h6>Tidak ada tamu pada kamar ini</h6>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="submit" type="button">Suspend Kamar</button>
-            </div>
-            @elseif(status == 2)
-            <form class="mb-3" action="">
-                <input type="hidden" name="kamar" id="kamar" value="{{id_kamar}}">
-                <div class="mx-2">
-                    <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Nama Tamu</label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Tamu">
-                    </div>
-                    <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Nomor KTP</label>
-                        <input class="form-control" type="text" name="ktp" id="ktp" placeholder="Nomor KTP">
-                    </div>
-                    <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Nomor Handphone</label>
-                        <input class="form-control" type="text" name="hp" id="hp" placeholder="Nomor Handphone">
-                    </div>
-                    <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Email</label>
-                        <input class="form-control" type="text" name="email" id="email" placeholder="Alamat Email">
-                    </div>
-                    <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Jumlah Hari</label>
-                        <input class="form-control" type="number" min=1 name="hari" id="hari" placeholder="Jumlah Hari Menginap">
-                    </div>
-                    <div class="row">
-                        <div class="col col-sm-6 ">
-                            <label class="col-sm-12 col-form-label">Additonal Item</label>
-                            <input class="form-control" type="text" name="item" id="item" placeholder="Item">
-                        </div>
-                        <div class="col col-sm-6 ">
-                            <label class="col-sm-12 col-form-label">Jumlah</label>
-                            <input class="form-control" type="text" name="jumlah" id="jumlah" placeholder="Jumlah Item">
-                        </div>
-                    </div>
-                    <div class="col my-3 d-flex justify-content-center">
-                        <button class="btn btn-primary btn-sm" id="addItem" type="button"><span class="fa fa-plus"></span>   Tambah Additional Item</button>
-                    </div>
-                    <div></div>
-                    <div class="modal-footer">
-                        <button class="btn btn-success" id="submit" type="button">Ubah Data</button>
-                    </div>
+                <div class="alert alert-warning dark" role="alert">
+                    <span>Kamar Ini Ada Pengunjung</span>
                 </div>
-            </form>
+            @else
+                <div class="alert alert-success dark d-flex justify-content-between" role="alert">
+                    <h4 class="d-flex align-items-center">Kamar Ini Kosong</h4>
+                    <button class="btn btn-primary btn-xs" type="button">Suspend</button>
+                </div>
             @endif
+            <div class="table-responsive">
+                <table class="table" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                        <td style="width:50px">Tipe</td>
+                        <td>Tipe {{tipe_kamar.tipe}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Deskripsi</td>
+                        <td>{{tipe_kamar.deskripsi}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Rate</td>
+                        <td>Rp. {{tipe_kamar.harga}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Luas Kamar</td>
+                        <td>{{tipe_kamar.luas_kamar}} meter persegi</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Luas Kamar Mandi</td>
+                        <td>{{tipe_kamar.luas_mandi}} meter persegi</td>
+                    </tr>
+                    <tr>
+                        @set('interior', tipe_kamar.interior.split(','))
+                        <td style="width:50px">Interior</td>
+                        @if(interior[0] == '')
+                            <td>Tidak Ada Interior</td>
+                        @else
+                            <td style="padding-left:30px">
+                            <ul style="list-style-type:disc">
+                                @each(inter in interior)
+                                    <li>{{inter}}</li>
+                                @endeach
+                            </ul>
+                            </td>
+                        @endif
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row mx-2">
+                <div class="col col-sm-4">
+                  <div class="mb-3">
+                    <div class="checkbox checkbox-success">
+                      @if(tipe_kamar.lemari)
+                        <input id="lemari" name="lemari" type="checkbox" value=1 checked disabled>
+                        <label for="lemari">Lemari</label>
+                      @else
+                        <input id="lemari" name="lemari" type="checkbox" value=1 disabled>
+                        <label for="lemari">Lemari</label>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="col col-sm-4">
+                  <div class="mb-3">
+                    <div class="checkbox checkbox-success">
+                      @if(tipe_kamar.tv)
+                        <input id="tv" name="tv" type="checkbox" value=1 checked disabled>
+                        <label for="tv">Televisi</label>  
+                      @else
+                        <input id="tv" name="tv" type="checkbox" value=1 disabled>
+                        <label for="tv">Televisi</label>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="col col-sm-4">
+                  <div class="mb-3">
+                    <div class="checkbox checkbox-success">
+                      @if(tipe_kamar.kulkas)
+                        <input id="kulkas" name="kulkas" type="checkbox" value=1 checked disabled>
+                        <label for="kulkas">Kulkas</label>  
+                      @else
+                        <input id="kulkas" name="kulkas" type="checkbox" value=1 disabled>
+                        <label for="kulkas">Kulkas</label>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-
-<script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>

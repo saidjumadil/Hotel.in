@@ -1,0 +1,40 @@
+<button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button">Edit</button>
+<div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+            <h5 class="modal-title">Form Edit Diskon</h5>
+        </div>
+        <div class="modal-body">
+            <form class="mb-3" action="{{route('diskon.editPost')}}" method="POST">
+                <div class="mx-3">
+                    <div class="row">
+                        <input type="hidden" name="id" value={{id}}>
+                        <div class="col col-sm-12 ">
+                            <label class="col-sm-12 col-form-label">Nama Diskon</label>
+                            <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Diskon" value="{{nama}}">
+                        </div>
+                        <div class="col col-sm-6 ">
+                            <label class="col-sm-12 col-form-label">Tanggal Mulai</label>
+                            <input class="form-control" type="date" name="mulai" id="mulai" placeholder="" value={{mulai}}>
+                        </div>
+                        <div class="col col-sm-6 ">
+                            <label class="col-sm-12 col-form-label">Tanggal Berakhir</label>
+                            <input class="form-control" type="date" name="akhir" id="akhir" placeholder="" value={{akhir}}>
+                        </div>
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Potongan Harga</label>
+                        <input class="form-control" type="number" name="potong" id="potong" placeholder="Potongan Harga" value={{potong}}>
+                    </div>
+                    <div class="mt-3 text-end">
+                        <button class="btn btn-secondary btn-sm" id="submit" type="submit">Edit</button>
+                    </div>
+                </div>
+            </form>
+            {{--  <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+            </div>  --}}
+        </div>
+    </div>
+</div>
