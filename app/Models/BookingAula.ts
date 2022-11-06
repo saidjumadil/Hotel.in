@@ -1,33 +1,36 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class User extends BaseModel {
+export default class BookingAula extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-
-  @column()
-  public username: string
 
   @column()
   public nama: string
 
   @column()
-  public password: string
-  
+  public event: string
+
   @column()
-  public ktp: string
-  
-  @column()
-  public no_hp: string
-  
-  @column()
-  public alamat: string
-  
+  public no_ktp: string
+
   @column()
   public email: string
-  
+
   @column()
-  public role: number
+  public no_hp: string
+
+  @column()
+  public mulai: Date
+
+  @column()
+  public akhir: Date
+
+  @column()
+  public total: number
+
+  @column()
+  public status_pembayaran: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

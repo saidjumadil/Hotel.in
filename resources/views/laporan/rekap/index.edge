@@ -98,12 +98,22 @@
                                           <th scope="col">Tanggal Check-In</th>
                                           <th scope="col">Tanggal Check-Out</th>
                                           <th scope="col">Total Pembayaran</th>
-                                          <th scope="col">Jenis Pembayaran</th>
                                           <th scope="col">Jumlah Tamu</th>
                                       </tr>
                                   </thead>
                                   <tbody id="tabel">
-                                    
+                                    @each((item, index) in rekap)
+                                      <tr>
+                                        <th scope="col">{{index + 1}}</th>
+                                        <td>{{item.serial}}</td>
+                                        <td>{{item.nama}}</td>
+                                        <td>Kamar {{item.detail.nomor}}</td>
+                                        <td>{{date(item.check_in)}}</td>
+                                        <td>{{date(item.check_out)}}</td>
+                                        <td>Rp {{item.total}}</td>
+                                        <td>{{item.jumlah_tamu}}</td>
+                                      </tr>
+                                    @endeach
                                   </tbody>
                               </table>
                           </div>

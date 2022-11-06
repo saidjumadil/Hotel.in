@@ -53,14 +53,14 @@
     "picomatch" "^2.3.1"
     "slash" "^3.0.0"
 
-"@adonisjs/auth@^8.2.2":
-  "integrity" "sha512-XCfZhe6pm2ImeADr3IquzjDJfwmQxuh2d27AdTfEKvMfpDHVHMnFOFBizfz18Z1Nas/Gl7Lw00CsrnpCLNswmA=="
-  "resolved" "https://registry.npmjs.org/@adonisjs/auth/-/auth-8.2.2.tgz"
-  "version" "8.2.2"
+"@adonisjs/auth@^8.2.3":
+  "integrity" "sha512-js9e8AHEsNC/8MGvho6MgL+uXr8SlhTg9MJJDWQBBiqsKkT7+H7NMP/pLbuSzYaaf40t2u/OXfq6wXuIC5ZYvw=="
+  "resolved" "https://registry.npmjs.org/@adonisjs/auth/-/auth-8.2.3.tgz"
+  "version" "8.2.3"
   dependencies:
     "@poppinss/hooks" "^5.0.3"
-    "@poppinss/utils" "^4.0.4"
-    "luxon" "^2.4.0"
+    "@poppinss/utils" "^5.0.0"
+    "luxon" "^3.0.4"
 
 "@adonisjs/bodyparser@^8.0.0", "@adonisjs/bodyparser@^8.1.6":
   "integrity" "sha512-8OyQO4BeIKK+xJSH1YdSZVTllTsq0uTHcZw4a/7eShXKaVT0z8/IupIG2uymVpPPSfu+3kbN9ueipqFsvz9MpA=="
@@ -1562,6 +1562,11 @@
   "resolved" "https://registry.npmjs.org/crypt/-/crypt-0.0.2.tgz"
   "version" "0.0.2"
 
+"crypto-js@^4.1.1":
+  "integrity" "sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw=="
+  "resolved" "https://registry.npmjs.org/crypto-js/-/crypto-js-4.1.1.tgz"
+  "version" "4.1.1"
+
 "csrf@^3.1.0":
   "integrity" "sha512-uTqEnCvWRk042asU6JtapDTcJeeailFy4ydOQS28bj1hcLnYRiqi8SsD2jS412AY1I/4qdOwWZun774iqywf9w=="
   "resolved" "https://registry.npmjs.org/csrf/-/csrf-3.1.0.tgz"
@@ -2966,10 +2971,10 @@
   "resolved" "https://registry.npmjs.org/luxon/-/luxon-2.5.0.tgz"
   "version" "2.5.0"
 
-"luxon@^3.0.3":
-  "integrity" "sha512-+EfHWnF+UT7GgTnq5zXg3ldnTKL2zdv7QJgsU5bjjpbH17E3qi/puMhQyJVYuCq+FRkogvB5WB6iVvUr+E4a7w=="
-  "resolved" "https://registry.npmjs.org/luxon/-/luxon-3.0.3.tgz"
-  "version" "3.0.3"
+"luxon@^3.0.3", "luxon@^3.0.4":
+  "integrity" "sha512-7w6hmKC0/aoWnEsmPCu5Br54BmbmUp5GfcqBxQngRcXJ+q5fdfjEzn7dxmJh2YdDhgW8PccYtlWKSv4tQkrTQg=="
+  "resolved" "https://registry.npmjs.org/luxon/-/luxon-3.1.0.tgz"
+  "version" "3.1.0"
 
 "macroable@^7.0.1":
   "integrity" "sha512-8bbZLq2JoGI7FdvmDIxed41opR2cqgUUrRN4fVEsajARzfHkZDAzbCg0RW+jIY93YhWuBsMOeLcIyYz5WU4HNQ=="

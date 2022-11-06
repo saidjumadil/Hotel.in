@@ -8,32 +8,27 @@
             <h5 class="modal-title">Form Check-Out Kamar {{nomor}}</h5>
         </div>
         <div class="modal-body">
-            <form class="mb-3" action="">
-                <input type="hidden" name="kamar" id="kamar" value="{{id_kamar}}">
+            <form class="mb-3" action="" method="POST">
+                <input type="hidden" name="id" id="id" value="{{id}}">
+                <input type="hidden" name="kamar" id="kamar" value="{{kamar}}">
                 <div class="mx-3">
                     <div class="row">
                         <div class="col col-sm-6 ">
                             <label class="col-sm-12 col-form-label">Tanggal Check-In</label>
-                            <input class="form-control" type="date" name="check_in" id="check_in" placeholder="">
+                            <input class="form-control" type="date" name="check_in" id="check_in" placeholder="" value={{check_in}} disabled>
                         </div>
                         <div class="col col-sm-6 ">
                             <label class="col-sm-12 col-form-label">Tanggal Check-Out</label>
-                            <input class="form-control" type="date" name="check_out" id="check_out" placeholder="">
+                            <input class="form-control" type="hidden" name="check_out" id="check_out" value={{check_out}}>
+                            <input class="form-control" type="date" name="check_out" id="check_out" placeholder="" value={{check_out}} disabled>
                         </div>
                     </div>
                     <div class="col col-sm-12 ">
                         <label class="col-sm-12 col-form-label">Total Pembayaran</label>
-                        <input class="form-control" type="number" name="bayar" id="bayar" placeholder="Total Harga Pembayaran">
-                    </div>
-                    <div class="col col-sm-12 ">
-                        <label class="col-sm-12 col-form-label">Jenis Pembayaran</label>
-                        <select class="form-control" name="jenis" id="jenis" placeholder="Jenis Pembayaran">
-                            <option value=1>Tunai</option>
-                            <option value=2>Transfer</option>
-                        </select>
+                        <input class="form-control" type="number" name="total" id="total" placeholder="Total Harga Pembayaran" value={{total}}>
                     </div>
                     <div class="modal-footer mt-3">
-                        <button class="btn btn-success" id="submit" type="button">Check-Out</button>
+                        <button class="btn btn-success" id="submit" type="submit">Check-Out</button>
                     </div>
                 </div>
             </form>

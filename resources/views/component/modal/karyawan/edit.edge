@@ -1,0 +1,42 @@
+<button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button">Edit</button>
+<div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+            <h5 class="modal-title">Form Tambah Karyawan</h5>
+        </div>
+        <div class="modal-body">
+            <form class="mb-3" action="{{route('karyawan.editPost')}}" method="POST">
+                <div class="mx-3">
+                    <input type="hidden" name="id" id="id" value="{{id}}">
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nama</label>
+                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Karyawan" value="{{nama}}">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nomor KTP</label>
+                        <input class="form-control" type="text" name="ktp" id="ktp" placeholder="Nomor KTP" value="{{ktp}}">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nomor Handphone</label>
+                        <input class="form-control" type="text" name="no_hp" id="hp" placeholder="Nomor Handphone" value="{{no_hp}}">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Alamat</label>
+                        <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Alamat Karyawan" value="{{alamat}}">
+                    </div>
+                    <div class="col col-sm-12">
+                        <label class="col-sm-12 col-form-label">Email</label>
+                        <input class="form-control" type="text" name="email" id="email" placeholder="Email" value="{{email}}">
+                    </div>
+                </div>
+                {{--  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                </div>  --}}
+        </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="submit" type="submit">Tambah</button>
+            </div>
+        </form>
+    </div>
+</div>

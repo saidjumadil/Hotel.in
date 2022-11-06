@@ -30,16 +30,16 @@ export default class Resepsi extends BaseModel {
   public id_item: number
   
   @column()
-  public nama_item: string
-  
-  @column()
   public jumlah_item: number
   
   @column()
-  public tgl_in: Date
+  public check_in: Date
   
   @column()
-  public tgl_out: Date
+  public check_out: Date
+
+  @column()
+  public diskon: number
   
   @column()
   public total: number

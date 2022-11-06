@@ -69,7 +69,7 @@
                     <div class="media static-top-widget">
                       <div class="align-self-center text-center"><i data-feather="map"></i></div>
                       <div class="media-body"><span class="m-0">Kamar Available</span>
-                        <h4 class="mb-0 counter">2</h4><i class="icon-bg" data-feather="map"></i>
+                        <h4 class="mb-0 counter">{{avail}}</h4><i class="icon-bg" data-feather="map"></i>
                       </div>
                     </div>
                   </div>
@@ -81,7 +81,7 @@
                     <div class="media static-top-widget">
                       <div class="align-self-center text-center"><i data-feather="box"></i></div>
                       <div class="media-body"><span class="m-0">Kamar Unvailable</span>
-                        <h4 class="mb-0 counter">1</h4><i class="icon-bg" data-feather="box"></i>
+                        <h4 class="mb-0 counter">{{unavail}}</h4><i class="icon-bg" data-feather="box"></i>
                       </div>
                     </div>
                   </div>
@@ -93,7 +93,7 @@
                     <div class="media static-top-widget">
                       <div class="align-self-center text-center"><i data-feather="archive"></i></div>
                       <div class="media-body"><span class="m-0">Kamar Suspend</span>
-                        <h4 class="mb-0 counter">0</h4><i class="icon-bg" data-feather="archive"></i>
+                        <h4 class="mb-0 counter">{{suspend}}</h4><i class="icon-bg" data-feather="archive"></i>
                       </div>
                     </div>
                   </div>
@@ -158,6 +158,14 @@
     {{--  <script src="../assets/js/theme-customizer/customizer.js"></script>  --}}
     <!-- login js-->
     <script>
+      const apiAnalisa = `{{route('api.analisa')}}`
+      fetch(apiAnalisa)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          piechar(data.kamar)
+        })
+
       chart("Oke")
       function chart(isi){
         var vihoAdminConfig = {primary : "#fd7e14", secondary : "#fd7e14"}
@@ -362,7 +370,6 @@
         chart51.render();
       }
       
-      piechar('isi')
       function piechar(isi){
         // pie chart
         var opt = {
@@ -370,8 +377,8 @@
                 width: 380,
                 type: 'pie',
             },
-            labels: ['Kamar A001', 'Kamar A002', 'Kamar A003', 'Kamar A004', 'Kamar A005'],
-            series: [44, 55, 13, 43, 22],
+            labels: isi.labels,
+            series: isi.series,
             responsive: [{
                 breakpoint: 480,
                 options: {

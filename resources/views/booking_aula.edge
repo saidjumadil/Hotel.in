@@ -31,9 +31,9 @@
 
           <div class="container-fluid dashboard-default-sec">
             <div class="col-sm-6">
-              <h3>Cetak Invoice Resepsi</h3>
+              <h3>Booking Aula</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Resepsional / </a><a href="{{route('resepsi.check_in')}}">Cetak Invoice</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="{{route('booking-aula')}}">Booking Aula</a></li>
               </ol>
             </div>
 
@@ -46,43 +46,53 @@
                     </div>
                   </div>
                 @end
-                {{--  <div class="mb-3">
-                  <label class="">Nomor Resepsi</label>
-                  <div class="row">
-                    <div class="col col-sm-6">
-                      <input class="form-control" type="text" name="id_pesanan" id="id_pesanan" placeholder="Nomor Resi">
-                    </div>
-                    <div class="col-sm-3">
-                      <button class="btn btn-success btn-sm">Cari</button>
-                    </div>
-                  </div>
-                </div>  --}}
-                <div class="card-block row">
+                <div class="col mb-3 text-end">
+                  @!component('component/modal/booking_aula/add')
+                </div>
+                <div class="card-block row mt-4">
                       <div class="col-sm-12 col-lg-12 col-xl-12">
                           <div class="table-responsive">
                               <table class="display table-bordered" id="basic-1">
                                   <thead class="table-primary">
                                       <tr>
                                           <th scope="col" style="width:20px">No</th>
-                                          <th scope="col">Nomor Resi</th>
-                                          <th scope="col">Nomor Kamar</th>
-                                          <th scope="col">Nama Tamu</th>
-                                          <th scope="col">Tanggal Check-In</th>
-                                          <th scope="col">Tanggal Check-Out</th>
+                                          <th scope="col">Event</th>
+                                          <th scope="col">Nama</th>
+                                          <th scope="col">Nomor KTP</th>
+                                          <th scope="col">Nomor Handphone</th>
+                                          <th scope="col">Email</th>
+                                          <th scope="col">Tanggal Booking</th>
+                                          <th scope="col">Pembayaran</th>
+                                          <th scope="col">Status Pembayaran</th>
+                                          <th scope="col"></th>
                                           <th scope="col"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    @each((item, index) in resepsi)
+                                    @each((item, index) in karyawan)
                                       <tr>
                                         <th scope="col">{{index + 1}}</th>
-                                        <td>{{item.serial}}</td>
-                                        <td>Kamar {{item.detail.nomor}}</td>
+                                        <td>{{item.ktp}}</td>
                                         <td>{{item.nama}}</td>
-                                        <td>{{date(item.check_in)}}</td>
-                                        <td>{{date(item.check_out)}}</td>
+                                        <td>{{item.no_hp}}</td>
+                                        <td>{{item.alamat}}</td>
+                                        <td>{{item.email}}</td>
                                         <td style="text-align:center">
-                                          <button class="btn btn-primary" id="" type="button">Cetak Invoice</button>
+                                          @!component('component/modal/karyawan/edit', {
+                                            "index" : index + 1,
+                                            id : item.id,
+                                            ktp : item.ktp,
+                                            nama : item.nama,
+                                            no_hp : item.no_hp,
+                                            alamat : item.alamat,
+                                            email : item.email
+                                          })
+                                        </td>
+                                        <td style="text-align:center">
+                                          <form action="{{route('karyawan.hapus')}}" method="post">
+                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
+                                            <button class="btn btn-danger" id="" type="submit">Hapus</button>
+                                          </form>
                                         </td>
                                       </tr>
                                     @endeach
@@ -125,7 +135,6 @@
     <script src="{{appUrl()}}/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="{{appUrl()}}/assets/js/datatable/datatables/datatable.custom.js"></script>
     <script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>
-    
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{appUrl()}}/assets/js/script.js"></script>

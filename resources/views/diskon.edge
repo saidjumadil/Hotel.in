@@ -81,7 +81,10 @@
                                           })
                                         </td>
                                         <td style="text-align:center">
-                                          <button class="btn btn-danger" id="" type="button">Hapus</button>
+                                          <form action="{{route('diskon.hapus')}}" method="post">
+                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
+                                            <button class="btn btn-danger" id="" type="submit">Hapus</button>
+                                          </form>
                                         </td>
                                       </tr>
                                     @endeach

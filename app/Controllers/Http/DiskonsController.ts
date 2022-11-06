@@ -31,4 +31,16 @@ export default class DiskonsController {
             return response.redirect('back')
         }
     }
+
+    async hapus({request, response, session}){
+        const {id} = request.all()
+        const hapus = await Diskon.query().where('id', id).delete()
+        if (hapus) {
+            session.flash('status', {type: 'success', message: 'Diskon Berhasil Dihapus'})
+            return response.redirect('back')
+        } else {
+            session.flash('status', {type: 'danger', message: 'Diskon Gagal Dihapus'})
+            return response.redirect('back')
+        }
+    }
 }

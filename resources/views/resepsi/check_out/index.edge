@@ -47,7 +47,7 @@
                   </div>
                 @end
                 <div class="col mb-3">
-                  <a href="#" class="btn btn-primary btn-sm" >Jumlah Kamar : 3</a>
+                  <a href="#" class="btn btn-primary btn-sm" >Jumlah Kamar : {{kamar.length}}</a>
                 </div>
                 <div class="card-block row">
                       <div class="col-sm-12 col-lg-12 col-xl-12">
@@ -64,45 +64,26 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <th scope="col">1</th>
-                                      <td>Zainuddin</td>
-                                      <td>KAMAR A001</td>
-                                      <td>12 September 2022</td>
-                                      <td>14 September 2022</td>
-                                      <td style="text-align:center">
-                                        @!component('component/modal_check_out',{
-                                          index : 0,
-                                          nomor : 'A001'
-                                        })
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="col">2</th>
-                                      <td>Sulastri Ningrum</td>
-                                      <td>KAMAR A002</td>
-                                      <td>12 September 2022</td>
-                                      <td>14 September 2022</td>
-                                      <td style="text-align:center">
-                                        @!component('component/modal_check_out',{
-                                          index : 1,
-                                          nomor : 'A002'
-                                        })
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="col">3</th>
-                                      <td>Sapaidi Sapa</td>
-                                      <td>KAMAR A003</td>
-                                      <td>12 September 2022</td>
-                                      <td>14 September 2022</td>
-                                      <td style="text-align:center">
-                                        @!component('component/modal_check_out',{
-                                          index : 2,
-                                          nomor : 'A003'
-                                        })
-                                      </td>
-                                    </tr>
+                                    @each((item, index) in kamar)
+                                      <tr>
+                                        <th scope="col">{{index + 1}}</th>
+                                        <td>{{item.nama}}</td>
+                                        <td>Kamar {{item.detail.nomor}}</td>
+                                        <td>{{date(item.check_in)}}</td>
+                                        <td>{{date(item.check_out)}}</td>
+                                        <td style="text-align:center">
+                                          @!component('component/modal_check_out',{
+                                            index : index + 1,
+                                            kamar : item.kamar,
+                                            nomor : item.detail.nomor,
+                                            check_in : tanggal(item.check_in),
+                                            check_out : tanggal(item.check_out),
+                                            total : item.total,
+                                            id : item.id
+                                          })
+                                        </td>
+                                      </tr>
+                                    @endeach
                                   </tbody>
                               </table>
                           </div>

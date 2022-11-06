@@ -1,0 +1,41 @@
+<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button"><span class="fa fa-plus"></span> Tambah Karyawan</button>
+<div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+            <h5 class="modal-title">Form Tambah Karyawan</h5>
+        </div>
+        <div class="modal-body">
+            <form class="mb-3" method="POST">
+                <div class="mx-3">
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nama</label>
+                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Karyawan">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nomor KTP</label>
+                        <input class="form-control" type="text" name="ktp" id="ktp" placeholder="Nomor KTP">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Nomor Handphone</label>
+                        <input class="form-control" type="text" name="no_hp" id="hp" placeholder="Nomor Handphone">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Alamat</label>
+                        <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Alamat Karyawan">
+                    </div>
+                    <div class="col col-sm-12">
+                        <label class="col-sm-12 col-form-label">Email</label>
+                        <input class="form-control" type="text" name="email" id="email" placeholder="Email">
+                    </div>
+                </div>
+                {{--  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                </div>  --}}
+        </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="submit" type="submit">Tambah</button>
+            </div>
+        </form>
+    </div>
+</div>
