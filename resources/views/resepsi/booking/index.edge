@@ -31,9 +31,9 @@
 
           <div class="container-fluid dashboard-default-sec">
             <div class="col-sm-6">
-              <h3>Check In Tamu</h3>
+              <h3>List Booking Kamar Hotel</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Resepsional / </a><a href="{{route('resepsi.check_in')}}">Check In</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Resepsional / </a><a href="{{route('resepsi.booking')}}">Booking Kamar</a></li>
               </ol>
             </div>
 
@@ -46,9 +46,12 @@
                     </div>
                   </div>
                 @end
-                
-                <div class="col mb-3">
-                  <a href="#" class="btn btn-primary btn-sm" >Jumlah Kamar Kosong : {{kamar.length}}</a>
+                {{--  <div class="col mb-3 text-end">
+                  <a href="{{route('input.kamar.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Booking Kamar</a>
+                </div>  --}}
+                <div class="col mb-3 text-end">
+                  {{--  <a href="{{route('input.additional_item.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Item</a>  --}}
+                  @!component('component/modal_addBooking', {kamar : kamar})
                 </div>
                 <div class="card-block row">
                       <div class="col-sm-12 col-lg-12 col-xl-12">
@@ -58,24 +61,39 @@
                                       <tr>
                                           <th scope="col" style="width:20px">No</th>
                                           <th scope="col">Nomor Kamar</th>
-                                          <th scope="col">Tipe Kamar</th>
-                                          <th scope="col">Harga</th>
+                                          <th scope="col">Nama Pengunjung</th>
+                                          <th scope="col">Tanggal Check-In</th>
+                                          <th scope="col">Tanggal Check-Out</th>
+                                          <th scope="col"></th>
                                           <th scope="col"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    @each((item, index) in kamar)
+                                    {{--  @set('bed', ['', 'Single Bed', 'Queen Bed', 'King Bed', 'Twin Bed', '3 Bed', 'K + S'])  --}}
+                                    @each((item, index) in booking)
                                       <tr>
                                         <th scope="col">{{index + 1}}</th>
-                                        <td>KAMAR {{item.nomor}}</td>
-                                        <td>Tipe {{item.nama_tipe}}</td>
-                                        <td>Rp {{item.harga}}</td>
-                                        <td style="text-align:center">
-                                          @!component('component/modal_check_in',
-                                          {
+                                        <td>
+                                          @!component('component/modal_booking', {
                                             index : index + 1,
-                                            nomor : item.id
+                                            kamar : item.detail,
+                                            item : item
                                           })
+                                        </td>
+                                        <td>{{item.nama}}</td>
+                                        <td>{{date(new Date(item.check_in))}}</td>
+                                        <td>{{date(new Date(item.check_out))}}</td>
+                                        <td style="text-align:center">
+                                          <form action="{{route('resepsi.booking.check-in')}}" method="get">
+                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
+                                            <button class="btn btn-success" id="" type="submit">Check-In</button>
+                                          </form>
+                                        </td>
+                                        <td style="text-align:center">
+                                          <form action="{{route('resepsi.booking.hapus')}}" method="get">
+                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
+                                            <button class="btn btn-danger" id="" type="submit">Hapus</button>
+                                          </form>
                                         </td>
                                       </tr>
                                     @endeach
@@ -103,76 +121,6 @@
         </footer>
       </div>
     </div>
-    
-    <script>
-      const route = `{{route('api.addItem')}}`
-      const routeDiskon = `{{route('api.diskon')}}`
-      const addItem = document.querySelectorAll('#addItem')
-      const additional = document.querySelectorAll('#additional')
-      const diskon = document.querySelectorAll('#diskon')
-      const check_in = document.querySelectorAll('#check_in')
-
-      addItem.forEach( (e, index) => {
-        const check_in_index = check_in[index]
-        check_in_index.addEventListener('change', res => {
-        const value = res.target.value
-        fetch(`${routeDiskon}?check_in=${value}`)
-          .then(response => response.json())
-          .then(data => {
-              diskon[index].innerHTML = `<option value="">-- Pilih Diskon --</option>`
-            console.log(data)
-            for(let item of data.diskon){
-              diskon[index].innerHTML += `<option value=${item.id}>${item.nama} diskon Rp. ${item.potong}</option>`
-            }
-          })
-        })
-        addItem[index].addEventListener('click', res => {
-          fetch(route)
-            .then(response => response.json())
-            .then(data => {
-              console.log(data)
-              let isi = 
-              `
-              <div class="row" id="itemAdd">
-                  <div class="col col-sm-5">
-                      <label class="col-sm-12 col-form-label">Additonal Item</label>
-                      <select class="form-control" name="id_item[]" id="item">`
-                        for(let item of data){
-                          isi +=` <option value=${item.id}>${item.nama}</option>`
-                        }
-              
-              isi += `
-                      </select>
-                  </div>
-                  <div class="col col-sm-5">
-                      <label class="col-sm-12 col-form-label">Jumlah</label>
-                      <input class="form-control" type="number" name="jumlah_item[]" id="jumlah" placeholder="Jumlah Item">
-                  </div>
-                  <div class="col col-sm-2 d-flex align-items-end">
-                    <button type="button" id="hapus" class="btn btn-danger btn-lg"><span class="icon-close"></span></button>
-                  </div>
-              </div>
-              `
-              additional[index].innerHTML += isi
-              deleteItem()
-            })
-        })
-      })
-
-      deleteItem()
-      function deleteItem(){
-        const itemAdd = document.querySelectorAll('#itemAdd')
-        const hapus = document.querySelectorAll('#hapus')
-
-        hapus.forEach( (e,i) => {
-          console.log("hapus");
-          e.addEventListener('click', res => {
-            itemAdd[i].remove()
-          })
-        })
-      }
-
-    </script>
     <!-- latest jquery-->
     <script src="{{appUrl()}}/assets/js/jquery-3.5.1.min.js"></script>
     <!-- feather icon js-->
@@ -188,7 +136,6 @@
     <script src="{{appUrl()}}/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="{{appUrl()}}/assets/js/datatable/datatables/datatable.custom.js"></script>
     <script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>
-    
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{appUrl()}}/assets/js/script.js"></script>

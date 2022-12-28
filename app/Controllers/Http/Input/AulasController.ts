@@ -4,51 +4,59 @@ import Aula from "App/Models/Aula"
 
 export default class AulasController {
     async index({view}){
-        const aula = await Aula.query().first()
+        const aula = await Aula.query()
+        return view.render('input/aula/index', {aula})
+    }
+    
+    async edit({view, request}){
+        const {id} = request.all()
+        const aula = await Aula.query().where('id', id).first()
 
-        if(aula){
-            return view.render('input/aula/index', {aula})
-        }
-        else{
-            const aula = {
-                deskripsi : '',
-                harga: 0,
-                luas: 0,
-                kursi: 0,
-                meja: 0,
-                proyektor: false,
-                layar: false,
-                sound: false,
-                status: 0
-            }
-            return view.render('input/aula/index', {aula})
-        }
+        return view.render('input/aula/edit', {aula})
     }
 
     async add({view}){
         return view.render('input/aula/add')
     }
 
-    async post({request, response}){
+    async hapus({request, response, session}){
+        const {id} = request.all()
+        const del = await Aula.query().where('id', id).delete()
+
+        if (del) {
+            session.flash('status', {type: 'success', message: 'Aula Berhasil Dihapus'})
+            return response.redirect().toRoute('input.aula')
+        } else {
+            session.flash('status', {type: 'danger', message: 'Aula Gagal Dihapus'})
+            return response.redirect().toRoute('input.aula')
+        }
+    }
+
+    async editPost({request, response, session}){
         const post = request.all()
-        const aula : any = await Aula.query().first()
-        const upaula = {
-            deskripsi: post.deskripsi,
-            harga: post.harga,
-            luas: post.luas,
-            kursi: post.kursi,
-            meja: post.meja,
-            proyektor: post.proyektor ? 1 : 0,
-            layar: post.layar ? 1 : 0,
-            sound: post.sound ? 1 : 0
+        const update = await Aula.query().where('id', post.id).update(post)
+
+        if (update) {
+            session.flash('status', {type: 'success', message: 'Aula Berhasil Diubah'})
+            return response.redirect().toRoute('input.aula')
+        } else {
+            session.flash('status', {type: 'danger', message: 'Aula Gagal Diubah'})
+            return response.redirect().toRoute('input.aula')
         }
-        if(aula){
-            await Aula.query().update(upaula).where('id', aula.id)
+    }
+
+    async post({request, response, session}){
+        const post = request.all()
+        console.log(post)
+        const add = await Aula.create(post)
+        if (add) {
+            session.flash('status', {type: 'success', message: 'Aula Berhasil Ditambahkan'})
+            return response.redirect().toRoute('input.aula')
+        } else {
+            session.flash('status', {type: 'danger', message: 'Aula Gagal Ditambahkan'})
+            return response.redirect().toRoute('input.aula')
         }
-        else{
-            await Aula.create(request.all())
-        }
-        return response.redirect().toRoute('input.aula')
+        
     }
 
     async booking({request, response}){

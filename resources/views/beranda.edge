@@ -48,7 +48,7 @@
             <div class="row">
               <div class="col-sm-12 col-xl-12">
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <div class="card o-hidden border-0">
                       <div class="bg-success b-r-4 card-body">
                         <div class="media static-top-widget">
@@ -60,13 +60,25 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <div class="card o-hidden border-0">
                       <div class="bg-danger b-r-4 card-body">
                         <div class="media static-top-widget">
                           <div class="align-self-center text-center"><i data-feather="box"></i></div>
                           <div class="media-body"><span class="m-0">Kamar Unvailable</span>
                             <h4 class="mb-0 counter">{{isi}}</h4><i class="icon-bg" data-feather="box"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="card o-hidden border-0">
+                      <div class="bg-primary b-r-4 card-body">
+                        <div class="media static-top-widget">
+                          <div class="align-self-center text-center"><i data-feather="disc"></i></div>
+                          <div class="media-body"><span class="m-0">Kamar Suspended</span>
+                            <h4 class="mb-0 counter">{{suspend}}</h4><i class="icon-bg" data-feather="disc"></i>
                           </div>
                         </div>
                       </div>
@@ -80,7 +92,14 @@
                   <div class="card-body">
                     <div class="row">
                       @each(item in kamar)
+                      @set('i', {})
+                      @if(item.status == 0)
                       @set('i', {status : "success", title : "Status Kamar Available", message : "Kamar Ini Kosong", avail : "Available", card : "primary"})
+                      @elseif(item.status == 1)
+                      @set('i', {status : "danger", title : "Status Kamar Unvailable", message : `Nama : ${item.detail.nama} <br/> Check In : ${date(item.detail.check_in)} <br/> Check Out : ${date(item.detail.check_out)}`, avail : "Unavailable", card : "danger"})
+                      @else  
+                      @set('i', {status : "warning", title : "Status Kamar Suspended", message : "Kamar Sedang Tidak Beroperasi", avail : "Suspended", card : "warning"})
+                      @endif
 
                         @!component('component/box/box1', {
                           kamar : item.nomor,
@@ -92,51 +111,7 @@
                           card : i.card
                         })
                       @endeach
-                      @!component('component/box/box1', {
-                        kamar : "A0002",
-                        tipe : "1",
-                        status : "danger",
-                        title : "Status Kamar Unavailable",
-                        message : "Nama : Zulkifli <br/> Check Out : 27 Sept 2022",
-                        avail : "Unavailable",
-                        card : "secondary"
-                      })
-                      @!component('component/box/box1', {
-                        kamar : "A0003",
-                        tipe : "1",
-                        status : "success",
-                        title : "Status Kamar Available",
-                        message : "Kamar Ini Kosong",
-                        avail : "Available",
-                        card : "primary"
-                      })
-                      @!component('component/box/box1', {
-                        kamar : "A0004",
-                        tipe : "2",
-                        status : "success",
-                        title : "Status Kamar Available",
-                        message : "Kamar Ini Kosong",
-                        avail : "Available",
-                        card : "primary"
-                      })
-                      @!component('component/box/box1', {
-                        kamar : "A0005",
-                        tipe : "2",
-                        status : "danger",
-                        title : "Status Kamar Unavailable",
-                        message : "Nama : Malik Esensial <br/> Check Out : 27 Sept 2022",
-                        avail : "Unavailable",
-                        card : "secondary"
-                      })
-                      @!component('component/box/box1', {
-                        kamar : "A0006",
-                        tipe : "2",
-                        status : "danger",
-                        title : "Status Kamar Unavailable",
-                        message : "Nama : Malik Esensial <br/> Check Out : 27 Sept 2022",
-                        avail : "Unavailable",
-                        card : "secondary"
-                      })
+                      
                     </div>
                   </div>
                 </div>

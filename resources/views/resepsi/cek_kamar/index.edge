@@ -72,7 +72,10 @@
                                         @!component('component/modal_kamar', {
                                           status : item.status,
                                           index : index + 1,
-                                          nomor : item.nomor
+                                          nomor : item.nomor,
+                                          detail : item.detail,
+                                          addItem : addItem,
+                                          diskon : item.diskon
                                         })
                                       </td>
                                       <td>Tipe {{item.nama_tipe}}</td>
@@ -112,31 +115,61 @@
     </div>
 
     <script>
+      const route = `{{route('api.addItem')}}`
+      const routeDiskon = `{{route('api.diskon')}}`
       const addItem = document.querySelectorAll('#addItem')
       const additional = document.querySelectorAll('#additional')
+      const check_in = document.querySelectorAll('#check_in')
+      const diskon = document.querySelectorAll('#diskon')
 
-      for(let index in addItem){
-        addItem[index].addEventListener('click', res => {
-          additional[index].innerHTML += 
-          `
-          <div class="row" id="itemAdd">
-              <div class="col col-sm-5">
-                  <label class="col-sm-12 col-form-label">Additonal Item</label>
-                  <input class="form-control" type="text" name="item" id="item" placeholder="Item">
-              </div>
-              <div class="col col-sm-5">
-                  <label class="col-sm-12 col-form-label">Jumlah</label>
-                  <input class="form-control" type="number" name="jumlah" id="jumlah" placeholder="Jumlah Item">
-              </div>
-              <div class="col col-sm-2 d-flex align-items-end">
-                <button type="button" id="hapus" class="btn btn-danger btn-lg"><span class="icon-close"></span></button>
-              </div>
-          </div>
-          `
-          deleteItem()
+      addItem.forEach( (e, index) => {
+        const check_in_index = check_in[index]
+        check_in_index.addEventListener('change', res => {
+        const value = res.target.value
+        fetch(`${routeDiskon}?check_in=${value}`)
+          .then(response => response.json())
+          .then(data => {
+              diskon[index].innerHTML = `<option value="">-- Pilih Diskon --</option>`
+            console.log(data)
+            for(let item of data.diskon){
+              diskon[index].innerHTML += `<option value=${item.id}>${item.nama} diskon Rp. ${item.potong}</option>`
+            }
+          })
         })
-      }
+        addItem[index].addEventListener('click', res => {
+          fetch(route)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data)
+              let isi = 
+              `
+              <div class="row" id="itemAdd">
+                  <div class="col col-sm-5">
+                      <label class="col-sm-12 col-form-label">Additonal Item</label>
+                      <select class="form-control" name="id_item[]" id="item">`
+                        for(let item of data){
+                          isi +=` <option value=${item.id}>${item.nama}</option>`
+                        }
+              
+              isi += `
+                      </select>
+                  </div>
+                  <div class="col col-sm-5">
+                      <label class="col-sm-12 col-form-label">Jumlah</label>
+                      <input class="form-control" type="number" name="jumlah_item[]" id="jumlah" placeholder="Jumlah Item">
+                  </div>
+                  <div class="col col-sm-2 d-flex align-items-end">
+                    <button type="button" id="hapus" class="btn btn-danger btn-lg"><span class="icon-close"></span></button>
+                  </div>
+              </div>
+              `
+              additional[index].innerHTML += isi
+              deleteItem()
+            })
+        })
+      })
 
+      deleteItem()
       function deleteItem(){
         const itemAdd = document.querySelectorAll('#itemAdd')
         const hapus = document.querySelectorAll('#hapus')

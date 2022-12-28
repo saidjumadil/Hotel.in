@@ -33,7 +33,7 @@
             <div class="col-sm-6">
               <h3>Booking Aula</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="{{route('booking-aula')}}">Booking Aula</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Booking Aula</a></li>
               </ol>
             </div>
 
@@ -46,50 +46,63 @@
                     </div>
                   </div>
                 @end
+                {{--  <div class="col mb-3 text-end">
+                  <a href="{{route('input.kamar.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Booking Kamar</a>
+                </div>  --}}
                 <div class="col mb-3 text-end">
-                  @!component('component/modal/booking_aula/add')
+                  {{--  <a href="{{route('input.additional_item.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Item</a>  --}}
+                  @!component('component/modal/booking_aula/add', {aula : aula})
                 </div>
-                <div class="card-block row mt-4">
+                <div class="card-block row">
                       <div class="col-sm-12 col-lg-12 col-xl-12">
                           <div class="table-responsive">
                               <table class="display table-bordered" id="basic-1">
                                   <thead class="table-primary">
                                       <tr>
                                           <th scope="col" style="width:20px">No</th>
-                                          <th scope="col">Event</th>
+                                          <th scope="col">Aula</th>
                                           <th scope="col">Nama</th>
-                                          <th scope="col">Nomor KTP</th>
-                                          <th scope="col">Nomor Handphone</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Tanggal Booking</th>
-                                          <th scope="col">Pembayaran</th>
+                                          <th scope="col">Tanggal Mulai</th>
+                                          <th scope="col">Tanggal Akhir</th>
+                                          <th scope="col">Total</th>
                                           <th scope="col">Status Pembayaran</th>
-                                          <th scope="col"></th>
                                           <th scope="col"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    @each((item, index) in karyawan)
+                                    {{--  @set('bed', ['', 'Single Bed', 'Queen Bed', 'King Bed', 'Twin Bed', '3 Bed', 'K + S'])  --}}
+                                    @each((item, index) in list)
                                       <tr>
                                         <th scope="col">{{index + 1}}</th>
-                                        <td>{{item.ktp}}</td>
-                                        <td>{{item.nama}}</td>
-                                        <td>{{item.no_hp}}</td>
-                                        <td>{{item.alamat}}</td>
-                                        <td>{{item.email}}</td>
-                                        <td style="text-align:center">
-                                          @!component('component/modal/karyawan/edit', {
-                                            "index" : index + 1,
-                                            id : item.id,
-                                            ktp : item.ktp,
-                                            nama : item.nama,
-                                            no_hp : item.no_hp,
-                                            alamat : item.alamat,
-                                            email : item.email
+                                        <td>
+                                          @!component('component/modal/booking_aula/detail', {
+                                            index : index + 1,
+                                            aula : item.detail,
+                                            item : item
                                           })
                                         </td>
+                                        <td>{{item.nama}}</td>
+                                        <td>{{date(new Date(item.mulai))}}</td>
+                                        <td>{{date(new Date(item.akhir))}}</td>
+                                        <td>Rp. {{item.total}}</td>
+                                        @if(item.status_pembayaran)
+                                          <td style="text-align:center">
+                                            <button class="btn btn-success" id="" type="button">Sudah Lunas</button>
+                                          </td>
+                                        @else
+                                        <td>
+                                          @!component('component/modal/booking_aula/bayar',{
+                                            index : index + 1,
+                                            nomor : item.detail.nama,
+                                            mulai : tanggal(item.mulai),
+                                            akhir : tanggal(item.akhir),
+                                            total : item.total,
+                                            id : item.id
+                                          })
+                                        </td>
+                                        @endif
                                         <td style="text-align:center">
-                                          <form action="{{route('karyawan.hapus')}}" method="post">
+                                          <form action="{{route('booking-aula.hapus')}}" method="POST">
                                             <input type="hidden" name="id" id="id" value="{{item.id}}">
                                             <button class="btn btn-danger" id="" type="submit">Hapus</button>
                                           </form>

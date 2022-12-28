@@ -12,6 +12,18 @@ export default class Kamar extends BaseModel {
   public tipe: number
 
   @column()
+  public harga: number
+
+  // @column()
+  // public luas_kamar: number
+
+  // @column()
+  // public luas_mandi: number
+
+  @column()
+  public tempat_tidur: number
+
+  @column()
   public nama_tipe: string
 
   @column()

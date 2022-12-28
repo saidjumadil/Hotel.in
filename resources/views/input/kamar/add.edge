@@ -64,8 +64,48 @@
                         <select class="form-control btn-square" id="input-text-1" name="tipe" data-bs-original-title="" title="" required>
                           <option value=> -- Pilih Tipe Kamar -- </option>
                           @each(item in tipe)
-                            <option value={{item.id}}>Tipe {{item.tipe}}</option>
+                            <option value={{item.id}}>{{item.tipe}}</option>
                           @endeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="input-text-1">Harga Kamar</label>
+                        <input class="form-control btn-square" id="input-text-1" name="harga" type="number" min=0 placeholder="Masukkan Harga Tipe Kamar" data-bs-original-title="" title="" required>
+                      </div>
+                    </div>
+                  </div>
+                  {{--  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="input-text-1">Luas Tipe Kamar</label>
+                        <input class="form-control btn-square" id="input-text-1" name="luas_kamar" type="number" min=0 placeholder="Masukkan Luas Tipe Kamar" data-bs-original-title="" title="" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="input-text-1">Luas Kamar Mandi</label>
+                        <input class="form-control btn-square" id="input-text-1" name="luas_mandi" type="number" placeholder="Masukkan Luas Kamar Mandi" data-bs-original-title="" title="" required>
+                      </div>
+                    </div>
+                  </div>  --}}
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="input-text-1">Tempat Tidur</label>
+                        <select class="form-control btn-square" id="input-text-1" name="tempat_tidur" data-bs-original-title="" title="" required>
+                          <option value=> -- Pilih Jenis Tempat Tidur -- </option>
+                          <option value=1>Single Bed</option>
+                          <option value=2>Queen Bed</option>
+                          <option value=3>King Bed</option>
+                          <option value=4>Twin Bed</option>
+                          <option value=5>3 Bed</option>
+                          <option value=6>K + S</option>
                         </select>
                       </div>
                     </div>

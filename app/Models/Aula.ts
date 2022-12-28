@@ -6,28 +6,16 @@ export default class Aula extends BaseModel {
   public id: number
 
   @column()
+  public nama: string
+
+  @column()
   public deskripsi: string
 
   @column()
   public harga: number
 
   @column()
-  public luas: number
-
-  @column()
-  public kursi: number
-
-  @column()
-  public meja: number
-
-  @column()
-  public layar: number
-
-  @column()
-  public proyektor: number
-
-  @column()
-  public sound: number
+  public kapasitas: number
 
   @column()
   public status: number

@@ -31,14 +31,14 @@
 
           <div class="container-fluid dashboard-default-sec">
             <div class="col-sm-6">
-              <h3>Aula Hotel</h3>
+              <h3>List Aula Hotel</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Management Data / </a><a href="{{route('input.aula')}}">Aula</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Management Data / </a><a href="{{route('input.kamar')}}">Aula</a></li>
               </ol>
             </div>
 
             <div class="card">
-              <div class="card-header pb-0">
+              <div class="card-header">
                 @if(flashMessages.get('status'))
                   <div class="col-sm-12 bg-{{flashMessages.get('status.type')}} b-r-4">
                     <div class="alert alert-{{flashMessages.get('status.type')}} dark alert-dismissible fade show" role="alert">{{flashMessages.get('status.message')}}
@@ -46,87 +46,64 @@
                     </div>
                   </div>
                 @end
-                <h5>Form Aula Hotel</h5>
+                <div class="col mb-3 text-end">
+                  <a href="{{route('input.aula.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Aula</a>
+                </div>
+                <div class="card-block row">
+                      <div class="col-sm-12 col-lg-12 col-xl-12">
+                          <div class="table-responsive">
+                              <table class="display table-bordered" id="basic-1">
+                                  <thead class="table-primary">
+                                      <tr>
+                                          <th scope="col" style="width:20px">No</th>
+                                          <th scope="col">Aula</th>
+                                          <th scope="col">Deskripsi</th>
+                                          <th scope="col">Rate</th>
+                                          <th scope="col">Kapasitas</th>
+                                          <th scope="col"></th>
+                                          <th scope="col"></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    @set('bed', ['', 'Single Bed', 'Queen Bed', 'King Bed', 'Twin Bed', '3 Bed', 'K + S'])
+                                    @each((item, index) in aula)
+                                      <tr>
+                                        <th scope="col">{{index + 1}}</th>
+                                        <td>
+                                          @!component('component/modal/aula', {
+                                            index : index + 1,
+                                            nama : item.nama,
+                                            tipe_kamar : item.deskripsi,
+                                            status: item.status
+                                          })
+                                        </td>
+                                        @if(item.deskripsi == null || item.deskripsi == '')
+                                          <td>Tidak Ada Deskripsi</td>
+                                        @else
+                                          <td>{{item.deskripsi}}</td>
+                                        @endif
+                                        <td>Rp. {{item.harga}}</td>
+                                        <td>{{item.kapasitas}}</td>
+                                        <td style="text-align:center">
+                                          <form action="{{route('input.aula.edit')}}" method="get">
+                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
+                                            <button class="btn btn-warning" id="" type="submit">Edit</button>
+                                          </form>
+                                        </td>
+                                        <td style="text-align:center">
+                                          <form action="{{route('input.aula.hapus')}}" method="get">
+                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
+                                            <button class="btn btn-danger" id="" type="submit">Hapus</button>
+                                          </form>
+                                        </td>
+                                      </tr>
+                                    @endeach
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
               </div>
-              <form class="form theme-form" method="POST">
-                <div class="card-body">
-                  <div class="mb-3 row">
-                    <label class="col-sm-3" for="input-text-1">Deskripsi Aula</label>
-                    <div class="col-sm-9">
-                      <textarea class="form-control btn-square" id="input-text-1" name="deskripsi" placeholder="Masukkan Deskripsi Aula" data-bs-original-title="" title="" value="{{aula.deskripsi}}">{{aula.deskripsi}}</textarea>
-                    </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label class="col-sm-3" for="input-text-1">Harga Sewa Aula</label>
-                    <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="harga" type="number" placeholder="Masukkan Harga Sewa Aula" data-bs-original-title="" title="" value="{{aula.harga}}" required>
-                    </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label class="col-sm-3" for="input-text-1">Luas Aula (m2)</label>
-                    <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="luas" type="number" placeholder="Masukkan Luas Aula" data-bs-original-title="" title="" required value="{{aula.luas}}">
-                    </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label class="col-sm-3" for="input-text-1">Jumlah Kursi</label>
-                    <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="kursi" type="number" placeholder="Masukkan Jumlah Kursi" data-bs-original-title="" title="" required value="{{aula.kursi}}">
-                    </div>
-                  </div>
-                  <div class="mb-3 row">
-                    <label class="col-sm-3" for="input-text-1">Jumlah Meja</label>
-                    <div class="col-sm-9">
-                      <input class="form-control btn-square" id="input-text-1" name="meja" type="number" placeholder="Masukkan Jumlah Meja" data-bs-original-title="" title="" required value="{{aula.meja}}">
-                    </div>
-                  </div>
-                  <div class="row mt-2">
-                    <div class="col col-sm-4">
-                      <div class="mb-3">
-                        <div class="checkbox checkbox-success">
-                          @if(aula.proyektor)
-                            <input id="proyektor" name="proyektor" type="checkbox" value=1 checked>
-                          @else
-                            <input id="proyektor" name="proyektor" type="checkbox" value=1>
-                          @endif
-                          <label for="proyektor">Proyektor</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col col-sm-4">
-                      <div class="mb-3">
-                        <div class="checkbox checkbox-success">
-                          @if(aula.layar)
-                            <input id="layar" name="layar" type="checkbox" value=1 checked>
-                          @else
-                          <input id="layar" name="layar" type="checkbox" value=1>
-                          @endif
-                          <label for="layar">Layar Proyektor</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col col-sm-4">
-                      <div class="mb-3">
-                        <div class="checkbox checkbox-success">
-                          @if(aula.sound)
-                            <input id="sound" name="sound" type="checkbox" value=1 checked>
-                          @else
-                            <input id="sound" name="sound" type="checkbox" value=1>
-                          @endif
-                          <label for="sound">Sound System</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                  <button class="btn btn-primary me-2 " type="submit">Edit</button>
-              </form>
-                  @!component('component/modal_aula',{
-                    index : 0,
-                    nomor : 'A001'
-                  })
-                </div>
             </div>
           </div>  
           <!-- Container-fluid Ends-->

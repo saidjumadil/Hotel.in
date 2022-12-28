@@ -10,10 +10,23 @@
                 <div class="alert alert-warning dark" role="alert">
                     <span>Kamar Ini Ada Pengunjung</span>
                 </div>
+            @elseif(status == 2)
+              <div class="alert alert-primary dark d-flex justify-content-between" role="alert">
+                  <h4 class="d-flex align-items-center">Kamar Ini Disuspend</h4>
+                  <form action="" method="post">
+                    <input type="hidden" name="id" id="id" value="{{id}}">
+                    <input type="hidden" name="status" id="status" value=0>
+                    <button class="btn btn-success btn-xs" type="submit">Buka Suspend</button>
+                  </form>
+              </div>
             @else
                 <div class="alert alert-success dark d-flex justify-content-between" role="alert">
                     <h4 class="d-flex align-items-center">Kamar Ini Kosong</h4>
-                    <button class="btn btn-primary btn-xs" type="button">Suspend</button>
+                    <form action="" method="post">
+                    <input type="hidden" name="status" id="status" value=2>
+                    <input type="hidden" name="id" id="id" value="{{id}}">
+                      <button class="btn btn-primary btn-xs" type="submit">Suspend</button>
+                    </form>
                 </div>
             @endif
             <div class="table-responsive">
@@ -27,7 +40,7 @@
                         <td style="width:50px">Deskripsi</td>
                         <td>{{tipe_kamar.deskripsi}}</td>
                     </tr>
-                    <tr>
+                    {{--  <tr>
                         <td style="width:50px">Rate</td>
                         <td>Rp. {{tipe_kamar.harga}}</td>
                     </tr>
@@ -38,7 +51,7 @@
                     <tr>
                         <td style="width:50px">Luas Kamar Mandi</td>
                         <td>{{tipe_kamar.luas_mandi}} meter persegi</td>
-                    </tr>
+                    </tr>  --}}
                     <tr>
                         @set('interior', tipe_kamar.interior.split(','))
                         <td style="width:50px">Interior</td>

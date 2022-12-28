@@ -2,6 +2,8 @@
 
 import Kamar from "App/Models/Kamar"
 import Resepsi from "App/Models/Resepsi"
+import Application from '@ioc:Adonis/Core/Application';
+import ExcelJS from "exceljs"
 
 export default class CetakInvoicesController {
     async index({view}){
@@ -15,4 +17,32 @@ export default class CetakInvoicesController {
         console.log(detail_resepsi)
         return view.render('resepsi/cetak_invoice/index', {resepsi : detail_resepsi})
     }
+
+    async invoice({response, request}){
+        const {fileName} = request.all()
+        const filePath = Application.publicPath('uploads/filename.xlsx')
+        console.log(filePath)
+        response.attachment(filePath, fileName+'.xlsx')
+    }
+
+    async bill({response, params, session}){
+        const path = 'BILL.xlsx'
+        const resepsi : any = await Resepsi.query().where('id', params.id).first()
+        const kamar : any = await Kamar.query().where('id', params.kamar).first()
+        // console.log(resepsi.serialize())
+
+        let post : any = {}
+        post.serial = resepsi.serial
+        post.total = resepsi.total
+
+        //create bill
+        await Resepsi.cetak(path, post, kamar, resepsi, session.get('user.nama'))
+        
+        const fileName = `${kamar.nomor}_${await Resepsi.date(resepsi.check_out)}`
+
+        const filePath = Application.publicPath('uploads/filename.xlsx')
+        console.log(filePath)
+        response.attachment(filePath, fileName+'.xlsx')
+    }
+
 }

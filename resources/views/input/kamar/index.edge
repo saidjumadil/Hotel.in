@@ -58,24 +58,30 @@
                                           <th scope="col" style="width:20px">No</th>
                                           <th scope="col">Nomor Kamar</th>
                                           <th scope="col">Tipe Kamar</th>
+                                          <th scope="col">Rate Kamar</th>
+                                          <th scope="col">Tempat Tidur</th>
                                           <th scope="col">Lantai</th>
                                           <th scope="col"></th>
                                           <th scope="col"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
+                                    @set('bed', ['', 'Single Bed', 'Queen Bed', 'King Bed', 'Twin Bed', '3 Bed', 'K + S'])
                                     @each((item, index) in kamars)
                                       <tr>
                                         <th scope="col">{{index + 1}}</th>
                                         <td>
                                           @!component('component/modal', {
                                             index : index + 1,
+                                            id: item.id,
                                             nomor : item.nomor,
                                             tipe_kamar : item.detail,
                                             status: item.status
                                           })
                                         </td>
                                         <td>Tipe {{item.nama_tipe}}</td>
+                                        <td>Rp. {{item.harga}}</td>
+                                        <td>{{bed[item.tempat_tidur]}}</td>
                                         <td>{{item.lantai}}</td>
                                         <td style="text-align:center">
                                           <form action="{{route('input.kamar.edit')}}" method="get">

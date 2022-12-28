@@ -61,4 +61,18 @@ export default class KamarsController {
             return response.redirect('back')
         }
     }
+
+    async suspend({request, response, session}){
+        const {id, status} = request.all()
+        const suspend = await Kamar.query().where('id', id).update({status: status})
+        console.log(suspend)
+
+        if (suspend) {
+            session.flash('status', {type: 'success', message: 'Kamar tersebut telah disuspend'})
+            return response.redirect('back')
+        } else {
+            session.flash('status', {type: 'danger', message: 'Kamar tersebut gagal disuspend'})
+            return response.redirect('back')
+        }
+    }
 }

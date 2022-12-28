@@ -1,0 +1,59 @@
+<a href="" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}">Aula {{aula.nama}}</a>
+<div class="modal fade" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aula {{aula.nama}}</h5>
+        </div>
+        <div class="modal-body p-4" style="text-align:left">
+          {{--  <h5 class="mb-3">Pengunjung Pada kamar tersebut</h5>  --}}
+            <div class="table-responsive">
+                <table class="table" cellspacing="0" cellpadding="0" style="border:none;border-color: transparent !important;">
+                  <tbody>
+                    <tr>
+                        <th style="width:50px">Nama</th>
+                        <td>{{item.nama}}</td>
+                    </tr>
+                    <tr>
+                        <th style="width:50px">Nomor KTP</th>
+                        <td>{{item.no_ktp}}</td>
+                    </tr>
+                    <tr>
+                      <th style="width:50px">Email</th>
+                      @if(item.email == null || item.email == '')
+                        <td>Tidak Ada Email</td>
+                      @else
+                        <td>{{item.ktp}}</td>
+                      @endif
+                    </tr>
+                    <tr>
+                      <th style="width:50px">No Handphone</th>
+                      @if(item.no_hp == null || item.no_hp == '')
+                        <td>Tidak Ada No Handphone</td>
+                      @else
+                        <td>{{item.no_hp}}</td>
+                      @endif
+                    </tr>
+                    {{--  <tr>
+                        <td style="width:50px">Rate</td>
+                        <td>Rp. {{tipe_kamar.harga}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Luas Kamar</td>
+                        <td>{{tipe_kamar.luas_kamar}} meter persegi</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Luas Kamar Mandi</td>
+                        <td>{{tipe_kamar.luas_mandi}} meter persegi</td>
+                    </tr>  --}}
+                </tbody>
+            </table>
+            
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

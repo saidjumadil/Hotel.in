@@ -23,6 +23,13 @@
                 <h4>Login</h4>
                 <h6>Welcome back! Log in to your account.</h6>
                 <div class="form-group">
+                  @if(flashMessages.get('status'))
+                    <div class="col-sm-12 bg-{{flashMessages.get('status.type')}} b-r-4">
+                      <div class="alert alert-{{flashMessages.get('status.type')}} dark alert-dismissible fade show" role="alert">{{flashMessages.get('status.message')}}
+                        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close" data-bs-original-title="" title=""></button>
+                      </div>
+                    </div>
+                  @end
                   <label>Username</label>
                   <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
                     <input class="form-control" type="text" name="username" required="" placeholder="username">
@@ -36,10 +43,10 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="checkbox">
+                  {{--  <div class="checkbox">
                     <input id="checkbox1" type="checkbox">
                     <label for="checkbox1">Remember password</label>
-                  </div><a class="link" href="forget-password.html">Forgot password?</a>
+                  </div><a class="link" href="forget-password.html">Forgot password?</a>  --}}
                 </div>
                 <div class="form-group">
                   <button class="btn btn-primary btn-block" type="submit">Sign in</button>

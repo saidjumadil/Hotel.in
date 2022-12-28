@@ -1,34 +1,34 @@
-<button class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button"><span class="fa fa-plus"></span>    Booking Aula</button>
+<button class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button"><span class="fa fa-plus"></span>    Booking Kamar</button>
 <div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="text-align:left">
         <div class="modal-header">
-            <h5 class="modal-title">Form Booking Aula</h5>
+            <h5 class="modal-title">Form Tambah Additional Item</h5>
         </div>
         <div class="modal-body">
           <form class="mb-3" action="" method="POST">
             <div class="mx-3">
               <div class="col col-sm-12 ">
-                <label class="col-sm-12 col-form-label">Aula</label>
-                <select class="form-control" name="aula" id="aula">
+                <label class="col-sm-12 col-form-label">Kamar</label>
+                <select class="form-control" name="kamar" id="kamar">
                   <option value="">-- Pilih Kamar --</option>
-                  @each(item in aula)
-                    <option value="{{item.id}}">{{item.nama}}</option>
+                  @each(item in kamar)
+                    <option value="{{item.id}}">{{item.nomor}}</option>
                   @endeach
                 </select>
               </div>
               <div class="row mb-3">
                   <div class="col col-sm-6 ">
-                      <label class="col-sm-12 col-form-label">Tanggal Mulai</label>
-                      <input class="form-control" type="date" name="mulai" id="mulai" placeholder="" required>
+                      <label class="col-sm-12 col-form-label">Tanggal Check-In</label>
+                      <input class="form-control" type="date" name="check_in" id="check_in" placeholder="" required>
                   </div>
                   <div class="col col-sm-6 ">
-                      <label class="col-sm-12 col-form-label">Tanggal Berakhir</label>
-                      <input class="form-control" type="date" name="akhir" id="akhir" placeholder="" required>
+                      <label class="col-sm-12 col-form-label">Tanggal Check-Out</label>
+                      <input class="form-control" type="date" name="check_out" id="check_out" placeholder="" required>
                   </div>
               </div>
                 <div class="col col-sm-12 ">
-                    <label class="col-sm-12 col-form-label">Atas Nama</label>
+                    <label class="col-sm-12 col-form-label">Nama Tamu</label>
                     <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Tamu" required>
                 </div>
                 <div class="col col-sm-12 ">
@@ -43,9 +43,24 @@
                     <label class="col-sm-12 col-form-label">Email</label>
                     <input class="form-control" type="text" name="email" id="email" placeholder="Alamat Email" >
                 </div>
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Jumlah Tamu</label>
+                    <input class="form-control" type="number" name="jumlah_tamu" id="tamu" placeholder="Jumlah tamu" required>
+                </div>
+                
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Pilih Diskon</label>
+                    <select class="form-control" name="diskon" id="diskon">
+                        <option value="">-- Pilih Diskon --</option>
+                    </select>
+                </div>
+                <div id="additional"></div>
+                <div class="col my-3 d-flex justify-content-center">
+                    <button class="btn btn-primary btn-sm" id="addItem" type="button"><span class="fa fa-plus"></span>   Tambah Additional Item</button>
+                </div>
                 <div></div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" id="submit" type="submit">Booking</button>
+                    <button class="btn btn-success" id="submit" type="submit">Check-In</button>
                 </div>
             </div>
           </form>

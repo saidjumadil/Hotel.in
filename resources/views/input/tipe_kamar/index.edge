@@ -57,11 +57,7 @@
                                   <tr>
                                       <th scope="col">No</th>
                                       <th scope="col">Tipe Kamar</th>
-                                      <th scope="col">Rate Kamar</th>
                                       <th scope="col" style="width:50px">Deskripsi</th>
-                                      <th scope="col">Luas Ruangan (Meter Persegi)</th>
-                                      <th scope="col">Luas Kamar Mandi (Meter Persegi)</th>
-                                      <th scope="col">Jenis Tempat Tidur</th>
                                       <th scope="col">Lemari</th>
                                       <th scope="col">Televisi</th>
                                       <th scope="col">Kulkas</th>
@@ -78,11 +74,15 @@
                                   <tr>
                                     <th scope="col">{{index + 1}}</th>
                                     <td>Tipe {{item.tipe}}</td>
-                                    <td>Rp {{item.harga}}</td>
-                                    <td style="width: 90px;">{{item.deskripsi}}</td>
-                                    <td>{{item.luas_kamar}}</td>
+                                    {{--  <td>Rp {{item.harga}}</td>  --}}
+                                    @if(item.deskripsi == null)
+                                    <td style="width: 90px;">Tidak Ada Deskripsi</td> 
+                                    @else
+                                      <td style="width: 90px;">{{item.deskripsi}}</td>
+                                    @end
+                                    {{--  <td>{{item.luas_kamar}}</td>
                                     <td>{{item.luas_mandi}}</td>
-                                    <td>{{bed[item.tempat_tidur]}}</td>
+                                    <td>{{bed[item.tempat_tidur]}}</td>  --}}
                                     <td>{{ada[item.lemari]}}</td>
                                     <td>{{ada[item.tv]}}</td>
                                     <td>{{ada[item.kulkas]}}</td>

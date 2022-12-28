@@ -1,26 +1,24 @@
 <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/prism.css">
 
-<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button">Check Out</button>
-<div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bayar{{ index + 1 }}" id="" type="button">Belum Bayar</button>
+<div class="modal fade bd-example-modal-lg" id="bayar{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="text-align:left">
         <div class="modal-header">
-            <h5 class="modal-title">Form Check-Out Kamar {{nomor}}</h5>
+            <h5 class="modal-title">Form Bayar {{nomor}}</h5>
         </div>
         <div class="modal-body">
-            <form class="mb-3" id="form" action="" method="POST">
+            <form class="mb-3" action="{{route('booking-aula.bayar')}}" method="POST">
                 <input type="hidden" name="id" id="id" value="{{id}}">
-                <input type="hidden" name="kamar" id="kamar" value="{{kamar}}">
                 <div class="mx-3">
                     <div class="row">
                         <div class="col col-sm-6 ">
-                            <label class="col-sm-12 col-form-label">Tanggal Check-In</label>
-                            <input class="form-control" type="date" name="check_in" id="check_in" placeholder="" value={{check_in}} disabled>
+                            <label class="col-sm-12 col-form-label">Tanggal Mulai</label>
+                            <input class="form-control" type="date" name="mulai" id="mulai" placeholder="" value={{mulai}} disabled>
                         </div>
                         <div class="col col-sm-6 ">
                             <label class="col-sm-12 col-form-label">Tanggal Check-Out</label>
-                            <input class="form-control" type="hidden" name="check_out" id="check_out" value={{check_out}}>
-                            <input class="form-control" type="date" name="check_out" id="check_out" placeholder="" value={{check_out}} disabled>
+                            <input class="form-control" type="date" name="akhir" id="akhir" placeholder="" value={{akhir}} disabled>
                         </div>
                     </div>
                     <div class="col col-sm-12 ">
@@ -28,7 +26,7 @@
                         <input class="form-control" type="number" name="total" id="total" placeholder="Total Harga Pembayaran" value={{total}}>
                     </div>
                     <div class="modal-footer mt-3">
-                        <button class="btn btn-success" id="submit" type="button">Check-Out</button>
+                        <button class="btn btn-success" id="submit" type="submit">Bayar</button>
                     </div>
                 </div>
             </form>

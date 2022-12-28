@@ -13,10 +13,10 @@ export default class TipeKamarsController {
     }
 
     async post({request, response}){
-        const {tipe, deskripsi, harga, luas_kamar, luas_mandi, tempat_tidur, lemari, tv, kulkas, interior} = request.all()
+        const {tipe, deskripsi, lemari, tv, kulkas, interior} = request.all()
         console.log(request.all())
 
-        let item = {tipe, deskripsi, harga, luas_kamar, luas_mandi, tempat_tidur, lemari, tv, kulkas, interior : interior ? interior.toString() : ''}
+        let item = {tipe, deskripsi, lemari, tv, kulkas, interior : interior ? interior.toString() : ''}
         await TipeKamar.create(item)
         return response.redirect().toRoute('input.tipe_kamar')
     }

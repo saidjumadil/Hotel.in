@@ -11,17 +11,17 @@ export default class TipeKamar extends BaseModel {
   @column()
   public deskripsi: string
 
-  @column()
-  public harga: number
+  // @column()
+  // public harga: number
 
-  @column()
-  public luas_kamar: number
+  // @column()
+  // public luas_kamar: number
 
-  @column()
-  public luas_mandi: number
+  // @column()
+  // public luas_mandi: number
 
-  @column()
-  public tempat_tidur: number
+  // @column()
+  // public tempat_tidur: number
 
   @column()
   public lemari: number

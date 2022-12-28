@@ -1,0 +1,52 @@
+<a href="" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}">{{nama}}</a>
+<div class="modal fade" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aula {{nama}}</h5>
+        </div>
+        <div class="modal-body">
+            @if(status == 1)
+                <div class="alert alert-warning dark" role="alert">
+                    <span>Aula Ini Ada Pengunjung</span>
+                </div>
+            @else
+                <div class="alert alert-success dark d-flex justify-content-between" role="alert">
+                    <h4 class="d-flex align-items-center">Aula Available</h4>
+                </div>
+            @endif
+            <div class="table-responsive">
+                <table class="table" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                        <td style="width:50px">Tipe</td>
+                        <td>Tipe </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Deskripsi</td>
+                        <td></td>
+                    </tr>
+                    {{--  <tr>
+                        <td style="width:50px">Rate</td>
+                        <td>Rp. {{tipe_kamar.harga}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Luas Kamar</td>
+                        <td>{{tipe_kamar.luas_kamar}} meter persegi</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px">Luas Kamar Mandi</td>
+                        <td>{{tipe_kamar.luas_mandi}} meter persegi</td>
+                    </tr>  --}}
+                    
+                </tbody>
+            </table>
+            
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -31,14 +31,14 @@
 
           <div class="container-fluid dashboard-default-sec">
             <div class="col-sm-6">
-              <h3>Cetak Invoice Resepsi</h3>
+              <h3>Edit Aula Hotel</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Resepsional / </a><a href="{{route('resepsi.check_in')}}">Cetak Invoice</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Management Data / </a><a href="{{route('input.aula')}}">Aula / </a> <a href="{{route('input.aula.edit')}}">Edit</a></li>
               </ol>
             </div>
 
             <div class="card">
-              <div class="card-header">
+              <div class="card-header pb-0">
                 @if(flashMessages.get('status'))
                   <div class="col-sm-12 bg-{{flashMessages.get('status.type')}} b-r-4">
                     <div class="alert alert-{{flashMessages.get('status.type')}} dark alert-dismissible fade show" role="alert">{{flashMessages.get('status.message')}}
@@ -46,52 +46,44 @@
                     </div>
                   </div>
                 @end
-                {{--  <div class="mb-3">
-                  <label class="">Nomor Resepsi</label>
-                  <div class="row">
-                    <div class="col col-sm-6">
-                      <input class="form-control" type="text" name="id_pesanan" id="id_pesanan" placeholder="Nomor Resi">
-                    </div>
-                    <div class="col-sm-3">
-                      <button class="btn btn-success btn-sm">Cari</button>
-                    </div>
-                  </div>
-                </div>  --}}
-                <div class="card-block row">
-                      <div class="col-sm-12 col-lg-12 col-xl-12">
-                          <div class="table-responsive">
-                              <table class="display table-bordered" id="basic-1">
-                                  <thead class="table-primary">
-                                      <tr>
-                                          <th scope="col" style="width:20px">No</th>
-                                          <th scope="col">Nomor Resi</th>
-                                          <th scope="col">Nomor Kamar</th>
-                                          <th scope="col">Nama Tamu</th>
-                                          <th scope="col">Tanggal Check-In</th>
-                                          <th scope="col">Tanggal Check-Out</th>
-                                          <th scope="col"></th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                    @each((item, index) in resepsi)
-                                      <tr>
-                                        <th scope="col">{{index + 1}}</th>
-                                        <td>{{item.serial}}</td>
-                                        <td>Kamar {{item.detail.nomor}}</td>
-                                        <td>{{item.nama}}</td>
-                                        <td>{{date(item.check_in)}}</td>
-                                        <td>{{date(item.check_out)}}</td>
-                                        <td style="text-align:center">
-                                          <a href="{{route('resepsi.bill', {id : item.id, kamar: item.detail.id})}}" target="_blank" class="btn btn-primary" id="" type="button">Cetak Invoice</a>
-                                        </td>
-                                      </tr>
-                                    @endeach
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
+                <h5>Form Aula Hotel</h5>
               </div>
+              <form class="form theme-form" method="POST">
+                <div class="card-body">
+                  <div class="mb-3 row">
+                    <input type="hidden" name="id" value="{{aula.id}}">
+                    <label class="col-sm-3" for="input-text-1">Nama Aula</label>
+                    <div class="col-sm-9">
+                      <input class="form-control btn-square" id="input-text-1" name="nama" placeholder="Masukkan Nama Aula" data-bs-original-title="" title="" value="{{aula.nama}}">
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Deskripsi Aula</label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control btn-square" id="input-text-1" name="deskripsi" placeholder="Masukkan Deskripsi Aula" data-bs-original-title="" title="">{{aula.deskripsi}}</textarea>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Harga Sewa Aula</label>
+                    <div class="col-sm-9">
+                      <input class="form-control btn-square" id="input-text-1" name="harga" type="number" placeholder="Masukkan Harga Sewa Aula" data-bs-original-title="" title="" value="{{aula.harga}}" required>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label class="col-sm-3" for="input-text-1">Kapasitas Aula</label>
+                    <div class="col-sm-9">
+                      <input class="form-control btn-square" id="input-text-1" name="kapasitas" type="number" placeholder="Masukkan Kapasitas Aula" data-bs-original-title="" title="" value="{{aula.kapasitas}}" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                  <button class="btn btn-primary me-2 " type="submit">Edit</button>
+              </form>
+                  {{--  @!component('component/modal_aula',{
+                    index : 0,
+                    nomor : 'A001'
+                  })  --}}
+                </div>
             </div>
           </div>  
           <!-- Container-fluid Ends-->
@@ -125,7 +117,6 @@
     <script src="{{appUrl()}}/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="{{appUrl()}}/assets/js/datatable/datatables/datatable.custom.js"></script>
     <script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>
-    
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{appUrl()}}/assets/js/script.js"></script>

@@ -77,6 +77,31 @@
                   <div class="row">
                     <div class="col">
                       <div class="mb-3">
+                        <label for="input-text-1">Harga Kamar</label>
+                        <input class="form-control btn-square" id="input-text-1" name="harga" type="number" min=0 value={{kamar.harga}} placeholder="Masukkan Harga Tipe Kamar" data-bs-original-title="" title="" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        @set('bed', [' -- Pilih Jenis Tempat Tidur -- ', 'Single Bed', 'Queen Bed', 'King Bed', 'Twin Bed', '3 Bed', 'K + S'])
+                        <label for="input-text-1">Tempat Tidur</label>
+                        <select class="form-control btn-square" id="input-text-1" name="tempat_tidur" data-bs-original-title="" title="" required>
+                          @each((item, index) in bed)
+                            @if(index == kamar.tempat_tidur)
+                              <option value={{index}} selected>{{item}}</option>
+                            @else
+                              <option value={{index}}>{{item}}</option>
+                            @endif
+                          @endeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
                         @set('lantai', ['-- Pilih Lantai --', 'Lantai 1', 'Lantai 2', 'Lantai 3'])
                         <label for="input-text-1">Lantai Kamar</label>
                         <select class="form-control btn-square" id="input-text-1" name="lantai" data-bs-original-title="" title="" required>

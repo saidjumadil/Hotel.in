@@ -6,14 +6,10 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      table.text('nama')
       table.text('deskripsi').defaultTo('')
       table.integer('harga') 
-      table.integer('luas') 
-      table.integer('kursi') 
-      table.integer('meja') 
-      table.boolean('proyektor').defaultTo(false)
-      table.boolean('layar').defaultTo(false)
-      table.boolean('sound').defaultTo(false)
+      table.integer('kapasitas')
       table.integer('status').defaultTo(0) 
 
       /**

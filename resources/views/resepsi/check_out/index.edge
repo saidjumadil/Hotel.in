@@ -108,6 +108,46 @@
         </footer>
       </div>
     </div>
+
+    
+    <script>
+      const submit = document.querySelectorAll('#submit')
+      const form = document.querySelectorAll('#form')
+      const id = document.querySelectorAll('#id')
+      const kamar = document.querySelectorAll('#kamar')
+      const check_in = document.querySelectorAll('#check_in')
+      const check_out = document.querySelectorAll('#check_out')
+      const total = document.querySelectorAll('#total')
+      const invoice = `{{route('resepsi.invoice')}}`
+      const route = `{{route('resepsi.check_out.post')}}`
+      const path = `{{appUrl()}}/assets/BILL.xlsx`
+
+      submit.forEach((e,i) => {
+        e.addEventListener('click', res => {
+          console.log(total[i].value, check_in[i].value, check_out[i].value, kamar[i].value, id[i].value)
+          fetch(route, {
+            method: 'POST',
+            body: new FormData(form[i])
+            // {total : total[i].value, 
+            //   check_in : new Date(check_in[i].value), 
+            //   check_out : new Date(check_out[i].value), 
+            //   kamar : kamar[i].value, 
+            //   id : id[i].value}
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data.fileName)
+            
+            fetch(invoice).then()
+            console.log(invoice)
+
+            window.open(`${invoice}?fileName=${data.fileName}`, '_blank');
+            window.location.reload();
+          })
+        })
+      })
+      
+    </script>
     <!-- latest jquery-->
     <script src="{{appUrl()}}/assets/js/jquery-3.5.1.min.js"></script>
     <!-- feather icon js-->
@@ -130,5 +170,6 @@
     {{--  <script src="{{appUrl()}}/assets/js/theme-customizer/customizer.js"></script>  --}}
     <!-- login js-->
     <!-- Plugin used-->
+
   </body>
 </html>

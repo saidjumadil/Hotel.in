@@ -9,6 +9,8 @@ export default class extends BaseSchema {
       table.string('nomor', 10).notNullable()
       table.integer('tipe', 10).unsigned().references('id').inTable('tipe_kamars')
       table.string('nama_tipe')
+      table.integer('harga')
+      table.integer('tempat_tidur')
       table.integer('lantai')
       table.integer('status').defaultTo(0)
 

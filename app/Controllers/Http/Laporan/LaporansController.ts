@@ -12,7 +12,6 @@ export default class LaporansController {
             item['detail'] = detail
             detail_rekap.push(item)
         }
-        console.log(detail_rekap)
         return view.render('laporan/rekap/index', {rekap : detail_rekap})
     }
 }

@@ -164,153 +164,16 @@
         .then(data => {
           console.log(data)
           piechar(data.kamar)
+          chart(data.income)
         })
 
-      chart("Oke")
       function chart(isi){
         var vihoAdminConfig = {primary : "#fd7e14", secondary : "#fd7e14"}
         var options51 = {
           series: [
             {
               name: "Pendapatan ",
-              data: [
-                {
-                  x: "2001",
-                  y: 5500
-                },
-                {
-                  x: "2002",
-                  y: 3800
-                },
-                {
-                  x: "2003",
-                  y: 5500
-                  
-                },
-                {
-                  x: "2004",
-                  y: 7700
-                },
-                {
-                  x: "2005",
-                  y: 1500
-                  
-                },
-                {
-                  x: "2006",
-                  y: 1000,
-                  fillColor: vihoAdminConfig.primary,
-                },
-                {
-                  x: "2007",
-                  y: 5000,
-                  fillColor: vihoAdminConfig.primary,
-                },
-                {
-                  x: "2008",
-                  y: 6000,
-                  fillColor: vihoAdminConfig.primary,
-                },
-                {
-                  x: "2009",
-                  y: 7900,
-                  fillColor: vihoAdminConfig.primary,
-                },
-                {
-                  x: "2010",
-                  y: 4700,
-                  fillColor: vihoAdminConfig.primary,
-                },
-                {
-                  x: "2011",
-                  y: 4000,
-                  fillColor: vihoAdminConfig.primary,
-                },
-                {
-                  x: "2012",
-                  y: 5000,
-                  fillColor: vihoAdminConfig.primary,
-                },
-                {
-                  x: "2013",
-                  y: 7500
-                },
-                {
-                  x: "2014",
-                  y: 3500
-                },
-                {
-                  x: "2015",
-                  y: 4000
-                },
-                {
-                  x: "2016",
-                  y: 6500
-                },
-                {
-                  x: "2017",
-                  y: 4000
-                },
-                {
-                  x: "2018",
-                  y: 5853
-                },
-                {
-                  x: "2019",
-                  y: 6553
-                },
-                {
-                  x: "2020",
-                  y: 5200
-                },
-                {
-                  x: "2021",
-                  y: 6200
-                },
-                {
-                  x: "2022",
-                  y: 880,
-                  fillColor: vihoAdminConfig.secondary,
-                },
-                {
-                  x: "2023",
-                  y: 1200,
-                  fillColor: vihoAdminConfig.secondary,
-                },
-                {
-                  x: "2024",
-                  y: 8010,
-                  fillColor: vihoAdminConfig.secondary,
-                },
-                {
-                  x: "2025",
-                  y: 6053,
-                  fillColor: vihoAdminConfig.secondary,
-                },
-                {
-                  x: "2026",
-                  y: 4000,
-                  fillColor: vihoAdminConfig.secondary,
-                },
-                {
-                  x: "2027",
-                  y: 1000,
-                  fillColor: vihoAdminConfig.secondary,
-                },
-                {
-                  x: "2028",
-                  y: 6200
-                },
-                {
-                  x: "2029",
-                  y: 6200
-                },
-                {
-                  x: "2030",
-                  y: 7500
-                }
-                
-              ]
+              data: isi
             }
           ],
           chart: {
