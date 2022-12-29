@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('nama')
       table.string('no_ktp')
       table.string('email').nullable()
+      table.string('alamat').nullable()
       table.string('no_hp').nullable()
       table.integer('jumlah_tamu')
       table.string('id_item')

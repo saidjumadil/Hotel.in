@@ -20,6 +20,9 @@ export default class Resepsi extends BaseModel {
   
   @column()
   public email: string
+
+  @column()
+  public alamat: string
   
   @column()
   public no_hp: string
@@ -67,7 +70,7 @@ export default class Resepsi extends BaseModel {
     const worksheet = wb.getWorksheet(1);
     worksheet.getCell('A6').value = `NO. BILL    :  ${post.serial}`
     worksheet.getCell('C7').value = `: ${resepsi.nama}`
-    // worksheet.getCell('C11').value = `: ${resepsi.alamat}`
+    worksheet.getCell('C11').value = `: ${resepsi.alamat == null || resepsi.alamat == '' ? 'Tidak Ada Alamat' : resepsi.alamat}`
     worksheet.getCell('C13').value = `: ${await Resepsi.date(resepsi.check_out)}`
     worksheet.getCell('B18').value = `Kamar ${kamar.nomor}`
     worksheet.getCell('C18').value = `1`

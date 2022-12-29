@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.string('nama', 80)
       table.string('no_ktp', 20)
       table.string('email', 80).nullable()
+      table.string('alamat').nullable()
       table.string('no_hp', 15).nullable()
       table.date('mulai')
       table.date('akhir')

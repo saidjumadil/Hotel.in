@@ -85,6 +85,7 @@ export default class KamarsController {
                 nama: booking.nama,
                 no_ktp: booking.no_ktp,
                 email: booking.email,
+                alamat: booking.alamat,
                 no_hp: booking.no_hp,
                 jumlah_tamu: booking.jumlah_tamu,
                 id_item: booking.id_item,

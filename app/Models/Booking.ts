@@ -21,6 +21,9 @@ export default class Booking extends BaseModel {
   public email: string
   
   @column()
+  public alamat: string
+
+  @column()
   public no_hp: string
 
   @column()

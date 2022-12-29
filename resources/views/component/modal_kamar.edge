@@ -41,6 +41,14 @@
                         @endif
                     </div>
                     <div class="col col-sm-12 ">
+                        <label class="col-sm-12 col-form-label">Alamat</label>
+                        @if(detail.alamat == null || detail.alamat== '')
+                        <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Alamat Tamu" >
+                        @else
+                        <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Alamat Tamu" value="{{detail.alamat}}">
+                        @endif
+                    </div>
+                    <div class="col col-sm-12 ">
                         <label class="col-sm-12 col-form-label">Jumlah Tamu</label>
                         <input class="form-control" type="number" name="jumlah_tamu" id="tamu" placeholder="Jumlah tamu" value="{{detail.jumlah_tamu}}" required>
                     </div>
