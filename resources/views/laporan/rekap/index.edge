@@ -56,15 +56,17 @@
                     </select>
                   </div>
                   <div class="row my-3" id="form-jenis">
+                    @set('tahun', new Date().getFullYear())
+
                     <div class="col col-sm-6">
                       <label class="col col-sm-12">Tahun Mulai</label>
                       <div class="col col-sm-12">
                         <select class="form-control" type="date" name="mulai" id="mulai" placeholder="">
-                          <option value='2022'>2022</option>
-                          <option value='2022'>2021</option>
-                          <option value='2022'>2020</option>
-                          <option value='2022'>2019</option>
-                          <option value='2022'>2018</option>
+                          <option value='{{tahun}}'>{{tahun}}</option>
+                          <option value='{{tahun-1}}'>{{tahun-1}}</option>
+                          <option value='{{tahun-2}}'>{{tahun-2}}</option>
+                          <option value='{{tahun-3}}'>{{tahun-3}}</option>
+                          <option value='{{tahun-4}}'>{{tahun-4}}</option>
                         </select>
                       </div>
                     </div>
@@ -72,11 +74,11 @@
                       <label class="col col-sm-12">Tahun Akhir</label>
                       <div class="col col-sm-12">
                         <select class="form-control" type="date" name="akhir" id="akhir" placeholder="">
-                          <option value='2022'>2022</option>
-                          <option value='2022'>2021</option>
-                          <option value='2022'>2020</option>
-                          <option value='2022'>2019</option>
-                          <option value='2022'>2018</option>
+                          <option value='{{tahun}}'>{{tahun}}</option>
+                          <option value='{{tahun-1}}'>{{tahun-1}}</option>
+                          <option value='{{tahun-2}}'>{{tahun-2}}</option>
+                          <option value='{{tahun-3}}'>{{tahun-3}}</option>
+                          <option value='{{tahun-4}}'>{{tahun-4}}</option>
                         </select>
                       </div>
                     </div>
