@@ -13,23 +13,23 @@ export default class AuthController {
     }
     
     async check({ request, response, auth, session }) {
-    const { username, password } = request.all()
-    // await auth.attempt(email, password)
-    const input_pw = md5(password).toString()
-    const user = await User.query().where('username', username).andWhere('password', input_pw).first()
-    if (user) {
-        auth.login(user)
-        session.put('user', user)
-        return response.redirect().toRoute('beranda')
-    } else {
-        session.flash('status', {type: 'danger', message: 'Username atau Password Salah'})
-        return response.redirect('back')
-    }
+        const { username, password } = request.all()
+        // await auth.attempt(email, password)
+        const input_pw = md5(password).toString()
+        const user = await User.query().where('username', username).andWhere('password', input_pw).first()
+        if (user) {
+            auth.login(user)
+            session.put('user', user)
+            return response.redirect().toRoute('beranda')
+        } else {
+            session.flash('status', {type: 'danger', message: 'Username atau Password Salah'})
+            return response.redirect('back')
+        }
     }
 
     async logout({ auth, response }) {
-    await auth.logout()
-    return response.redirect().toRoute('login')
+        await auth.logout()
+        return response.redirect().toRoute('login')
     }
 
     async gantiPassword({request, response, session, auth}){

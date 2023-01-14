@@ -24,7 +24,7 @@ export default class CheckOutsController {
     async post({request, response, session}) {
         const post = request.all()
         console.log(post)
-        const path = 'BILL.xlsx'
+        const path = 'bill_kamar.xls'
         const resepsi : any = await Resepsi.query().where('id', post.id).first()
         const kamar : any = await Kamar.query().where('id', post.kamar).first()
         // console.log(resepsi.serialize())
@@ -38,42 +38,30 @@ export default class CheckOutsController {
         //create bill
         await Resepsi.cetak(path, post, kamar, resepsi, session.get('user.nama'))
 
-        const emailData = {nomor:kamar.nomor, nama:resepsi.nama}
+        // const emailData = {nomor:kamar.nomor, nama:resepsi.nama}
         const fileName = `${kamar.nomor}_${await Resepsi.date(resepsi.check_out)}`
 
-        let kirimEmail = ''
-        if (!(resepsi.email == null || resepsi.email == '')) {
-        // if (true) {
-            kirimEmail = await Mail.send((message) => {
-                message
-                  .to(resepsi.email)
-                  .from(Env.get('SMTP_USERNAME'), Env.get('SMTP_PASSWORD'))
-                  .subject('Bill Pemesanan Kamar Hotel Djarwal')
-                  .htmlView('email/konfirmasi', emailData)
-                  .attach(Application.publicPath('uploads/filename.xlsx'), {filename : fileName+'.xlsx'})
-              })
-        }
+        // let kirimEmail = ''
+        // if (!(resepsi.email == null || resepsi.email == '')) {
+        // // if (true) {
+        //     kirimEmail = await Mail.send((message) => {
+        //         message
+        //           .to(resepsi.email)
+        //           .from(Env.get('SMTP_USERNAME'), Env.get('SMTP_PASSWORD'))
+        //           .subject('Bill Pemesanan Kamar Hotel Djarwal')
+        //           .htmlView('email/konfirmasi', emailData)
+        //           .attach(Application.publicPath('uploads/filename.xlsx'), {filename : fileName+'.xlsx'})
+        //       })
+        // }
         
-        if (kirimEmail == '') {
-            const update = await Resepsi.query().where('id', post.id).update(post)
-            if (update) {
-                await Kamar.query().where('id', post.kamar).update('status', 0)
-                session.flash('status', {type: 'success', message: 'Tamu Berhasil Check-Out'})
-                return {fileName : fileName}
-            } else {
-                session.flash('status', {type: 'danger', message: 'Tamu Gagal Check-Out'})
-                return response.redirect('back')
-            }
+        const update = await Resepsi.query().where('id', post.id).update(post)
+        if (update) {
+            await Kamar.query().where('id', post.kamar).update('status', 0)
+            session.flash('status', {type: 'success', message: 'Tamu Berhasil Check-Out'})
+            return {fileName : fileName}
         } else {
-            const update = await Resepsi.query().where('id', post.id).update(post)
-            if (update) {
-                await Kamar.query().where('id', post.kamar).update('status', 0)
-                session.flash('status', {type: 'success', message: 'Tamu Berhasil Check-Out dan Dikirim ke Email'})
-                return {fileName : fileName}
-            } else {
-                session.flash('status', {type: 'danger', message: 'Tamu Gagal Check-Out'})
-                return response.redirect('back')
-            }
+            session.flash('status', {type: 'danger', message: 'Tamu Gagal Check-Out'})
+            return response.redirect('back')
         }
 
     }

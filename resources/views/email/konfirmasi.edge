@@ -54,18 +54,46 @@
 
 <body>
   <center>
-
-    <h1>DJARWAL HOTEL</h1>
-    <p>Terima kasih telah berkunjung ke hotel kami</p>
-
-    <p>Jika ada yang ingin ditanyakan, silahkan hubungi kami di email <i>djarwal.hotel@gmail.com</i></p>
-    <p>Berikut adalah bill pemesanan</p>
-
-    <p><b>Kamar: Kamar {{nomor}}</b></p>
-    <p><b>Atas nama: {{nama}}</b></p>
-
-
+    <h3>LAPORAN HARIAN TANGGAL {{date(new Date(post.tanggal))}}</h3>
   </center>
+  <h4>ROOM YANG TERJUAL ({{rekap.length}})</h4>
+  @each((item, index) in rekap)
+    <p>{{index + 1}}. {{item.meta.nomor}}</p>
+  @endeach
+
+  <h4>ROOM Terisi ({{belum.length}})</h4>
+  @each((item, index) in belum)
+    <p>{{index + 1}}. {{item.meta.nomor}}</p>
+  @endeach
+
+  <h4>PENDAPATAN DR ROOM :</h4>
+  @each((item, index) in rekap)
+    <p>{{index + 1}}. {{item.meta.nomor}} = Rp. {{item.total}}</p>
+  @endeach
+
+  @set('sum', 0)
+  <h4>
+    PENDAPATAN HR INI = RP. {{post.total}},- 
+    @if(post.status)
+    ( TERMASUK TRANSAKSI ) 
+    @set('sum', parseInt(sum) + parseInt(post.total))
+    @else
+    ( TDK TERMASUK TRANSAKSI )
+    @endif
+  </h4>
+
+  @if(lain.length > 0)
+    <h4>NB : JUMLAH PENDAPATAN TERMASUK </h4>
+    <ul>
+      @each((item, index) in lain)
+        @set('sum', parseInt(sum) + parseInt(item.total))
+        <li>PENDAPATAN TGL {{tanggal_laporan(new Date(item.tanggal))}} = Rp. {{item.total}}</li>
+      @endeach
+    </ul>
+  @endif
+
+  <h4>TOTAL TRANSAKSI = RP. {{sum}},-</h4>
+
 </body>
 
 </html>

@@ -18,4 +18,11 @@ View.global('tanggal', function(tanggal : Date){
     const month = ('0' + (tanggal.getMonth() + 1)).slice(-2)
     const year = tanggal.getFullYear()
     return `${year}-${month}-${date}`
-  })
+})
+
+View.global('tanggal_laporan', function(tanggal : Date){
+    const date = ('0' + tanggal.getDate()).slice(-2)
+    const month = ('0' + (tanggal.getMonth() + 1)).slice(-2)
+    const year = tanggal.getFullYear()
+    return `${date}/${month}/${year}`
+})

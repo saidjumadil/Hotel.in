@@ -48,6 +48,7 @@ Route.group(() => {
     Route.get('booking-aula', 'BookingAulasController.index').as('booking-aula')
     Route.post('booking-aula', 'BookingAulasController.post').as('booking-aula.post')
     Route.post('booking-aula/bayar', 'BookingAulasController.bayar').as('booking-aula.bayar')
+    Route.post('booking-aula/edit', 'BookingAulasController.edit').as('booking-aula.edit')
     Route.post('booking-aula/hapus', 'BookingAulasController.hapus').as('booking-aula.hapus')
     
     Route.group(() => {
@@ -114,6 +115,8 @@ Route.group(() => {
     Route.group(() => {
         Route.get('analisa', 'Laporan/AnalisasController.index').as('analisa')
         Route.get('rekap', 'Laporan/LaporansController.index').as('rekap')
+        Route.get('kirim', 'Laporan/LaporansController.kirim').as('kirim')
+        Route.post('kirim', 'Laporan/LaporansController.kirimPost').as('kirim.post')
     }).prefix('laporan').as('laporan')
     
     Route.group(() => {

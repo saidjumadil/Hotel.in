@@ -26,14 +26,14 @@ export default class CetakInvoicesController {
     }
 
     async bill({response, params, session}){
-        const path = 'BILL.xlsx'
+        const path = 'bill_kamar.xlsx'
         const resepsi : any = await Resepsi.query().where('id', params.id).first()
         const kamar : any = await Kamar.query().where('id', params.kamar).first()
-        // console.log(resepsi.serialize())
-
+        
         let post : any = {}
         post.serial = resepsi.serial
         post.total = resepsi.total
+        console.log(resepsi.serial)
 
         //create bill
         await Resepsi.cetak(path, post, kamar, resepsi, session.get('user.nama'))

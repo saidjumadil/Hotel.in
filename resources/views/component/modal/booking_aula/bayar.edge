@@ -8,8 +8,10 @@
             <h5 class="modal-title">Form Bayar {{nomor}}</h5>
         </div>
         <div class="modal-body">
-            <form class="mb-3" action="{{route('booking-aula.bayar')}}" method="POST">
+            <form class="mb-3" action="{{route('booking-aula.bayar')}}" id="form" method="POST">
                 <input type="hidden" name="id" id="id" value="{{id}}">
+                <input type="hidden" name="mulai" id="mulai" value="{{mulai}}">
+                <input type="hidden" name="akhir" id="akhir" value="{{akhir}}">
                 <div class="mx-3">
                     <div class="row">
                         <div class="col col-sm-6 ">
@@ -17,7 +19,7 @@
                             <input class="form-control" type="date" name="mulai" id="mulai" placeholder="" value={{mulai}} disabled>
                         </div>
                         <div class="col col-sm-6 ">
-                            <label class="col-sm-12 col-form-label">Tanggal Check-Out</label>
+                            <label class="col-sm-12 col-form-label">Tanggal Akhir</label>
                             <input class="form-control" type="date" name="akhir" id="akhir" placeholder="" value={{akhir}} disabled>
                         </div>
                     </div>
@@ -26,7 +28,7 @@
                         <input class="form-control" type="number" name="total" id="total" placeholder="Total Harga Pembayaran" value={{total}}>
                     </div>
                     <div class="modal-footer mt-3">
-                        <button class="btn btn-success" id="submit" type="submit">Bayar</button>
+                        <button class="btn btn-success" id="submit" type="button">Bayar</button>
                     </div>
                 </div>
             </form>

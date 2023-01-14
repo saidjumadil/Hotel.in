@@ -1,0 +1,48 @@
+<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tooltipmodal{{ index + 1 }}" id="" type="button"><span class="fa fa-plus"></span> Kirim Laporan Harian</button>
+<div class="modal fade bd-example-modal-lg" id="tooltipmodal{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+            <h5 class="modal-title">Form Tambah Karyawan</h5>
+        </div>
+        <div class="modal-body">
+            <form class="mb-3" id="form" method="POST">
+                <div class="mx-3">
+                    <div class="col col-sm-12 mb-3">
+                        <label class="col-sm-12 col-form-label">Tanggal</label>
+                        <input class="form-control" type="date" name="tanggal" id="tanggal" placeholder="Nama Karyawan">
+                    </div>
+                    <div class="col col-sm-12 ">
+                        <label class="d-block" for="chk-ani">
+                            <input class="checkbox_animated" id="chk-ani" type="checkbox" name="status" id="status" checked="" value=1> Sudah Transaksi
+                        </label>
+                    </div>
+                    <div class="col col-sm-12">
+                        <label class="col-sm-12 col-form-label">Laporan Lainnya</label>
+                        <div class="row">
+                            <div class="col col-sm-8">
+                                <select class="form-control" id="lainnya">
+                                    <option value="">-- Pilih Laporan Lainnya --</option>
+                                    @each(item in belum)
+                                        <option value="{{item.id}}">{{date(item.tanggal)}}</option>
+                                    @endeach
+                                </select>
+                            </div>
+                            <div class="col col-sm-3 d-flex align-items-center">
+                                <button class="btn btn-success btn-sm" id="tambah" type="button">Tambah</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2" id="lain">
+                    </div>
+                </div>
+                {{--  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                </div>  --}}
+        </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="submit" type="submit">Kirim Laporan</button>
+            </div>
+        </form>
+    </div>
+</div>

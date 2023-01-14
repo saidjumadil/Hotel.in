@@ -1,0 +1,82 @@
+<a href="" data-bs-toggle="modal" data-bs-target="#edit{{ index + 1 }}">Booking {{detail.nama}}</a>
+<div class="modal fade bd-example-modal-lg" id="edit{{ index + 1 }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+            <h5 class="modal-title">Form Edit Booking Aula</h5>
+        </div>
+        <div class="modal-body">
+          <form class="mb-3" action="{{route('booking-aula.edit')}}" method="POST">
+            <div class="mx-3">
+              <div class="col col-sm-12 ">
+                <input type="hidden" name="id" id="id" value="{{item.id}}">
+                <label class="col-sm-12 col-form-label">Aula</label>
+                <select class="form-control" name="aula" id="aula">
+                  <option value="">-- Pilih Kamar --</option>
+                  @each(i in aula)
+                    @if(i.id == item.aula)
+                        <option value="{{i.id}}" selected>{{i.nama}}</option>
+                    @else
+                        <option value="{{i.id}}">{{i.nama}}</option>
+                    @endif
+                  @endeach
+                </select>
+              </div>
+              <div class="row mb-3">
+                  <div class="col col-sm-6 ">
+                      <label class="col-sm-12 col-form-label">Tanggal Mulai</label>
+                      <input class="form-control" type="date" name="mulai" id="mulai" placeholder="" value="{{tanggal(item.mulai)}}" required>
+                  </div>
+                  <div class="col col-sm-6 ">
+                      <label class="col-sm-12 col-form-label">Tanggal Berakhir</label>
+                      <input class="form-control" type="date" name="akhir" id="akhir" placeholder="" value="{{tanggal(item.akhir)}}" required>
+                  </div>
+              </div>
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Atas Nama</label>
+                    <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Tamu" value="{{item.nama}}" required>
+                </div>
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Nomor KTP</label>
+                    <input class="form-control" type="text" name="no_ktp" id="ktp" placeholder="Nomor KTP" value="{{item.no_ktp}}" required>
+                </div>
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Nomor Handphone</label>
+                    @if(item.no_hp == null || item.no_hp == '')
+                        <input class="form-control" type="text" name="no_hp" id="hp"  placeholder="Nomor Handphone" >
+                    @else
+                        <input class="form-control" type="text" name="no_hp" id="hp"  placeholder="Nomor Handphone" value="{{item.no_hp}}">
+                    @endif
+                </div>
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Email</label>
+                    @if(item.email == null || item.email == '')
+                        <input class="form-control" type="text" name="email" id="email" placeholder="Alamat Email" >
+                    @else
+                        <input class="form-control" type="text" name="email" id="email" placeholder="Alamat Email" value="{{item.email}}">
+                    @endif
+                </div>
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Alamat</label>
+                    @if(item.alamat == null || item.alamat == '')
+                        <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Alamat Tamu" >
+                    @else
+                        <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Alamat Tamu" value="{{item.alamat}}">
+                    @endif
+                </div>
+                <div class="col col-sm-12 ">
+                    <label class="col-sm-12 col-form-label">Jumlah Tamu</label>
+                    <input class="form-control" type="number" name="jumlah_tamu" id="jumlah_tamu" placeholder="Jumlah Tamu" value="{{item.jumlah_tamu}}">
+                </div>
+                <div></div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="" type="submit">Edit</button>
+                </div>
+            </div>
+          </form>
+            {{--  <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+            </div>  --}}
+        </div>
+    </div>
+</div>

@@ -31,9 +31,9 @@
 
           <div class="container-fluid dashboard-default-sec">
             <div class="col-sm-6">
-              <h3>Booking Aula</h3>
+              <h3>Kirim Laporan Harian</h3>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Booking Aula</a></li>
+                <li class="breadcrumb-item"><a href="#">Djarwal / <a href="">Kirim Laporan Harian</a></li>
               </ol>
             </div>
 
@@ -51,7 +51,7 @@
                 </div>  --}}
                 <div class="col mb-3 text-end">
                   {{--  <a href="{{route('input.additional_item.add')}}" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah Item</a>  --}}
-                  @!component('component/modal/booking_aula/add', {aula : aula})
+                  @!component('component/modal/kirim/add', {belum : belum})
                 </div>
                 <div class="card-block row">
                       <div class="col-sm-12 col-lg-12 col-xl-12">
@@ -60,54 +60,36 @@
                                   <thead class="table-primary">
                                       <tr>
                                           <th scope="col" style="width:20px">No</th>
-                                          <th scope="col">Aula</th>
-                                          <th scope="col">Nama</th>
-                                          <th scope="col">Tanggal Mulai</th>
-                                          <th scope="col">Tanggal Akhir</th>
-                                          <th scope="col">Total</th>
-                                          <th scope="col">Status Pembayaran</th>
+                                          <th scope="col">Tanggal</th>
+                                          <th scope="col">Total Pemasukan</th>
+                                          <th scope="col">Status Transaksi</th>
                                           <th scope="col"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                     {{--  @set('bed', ['', 'Single Bed', 'Queen Bed', 'King Bed', 'Twin Bed', '3 Bed', 'K + S'])  --}}
-                                    @each((item, index) in list)
+                                    @each((item, index) in report)
                                       <tr>
                                         <th scope="col">{{index + 1}}</th>
-                                        <td>
-                                          @!component('component/modal/booking_aula/edit', {
-                                            index : index + 1,
-                                            aula : aula,
-                                            detail : item.detail,
-                                            item : item
-                                          })
-                                        </td>
-                                        <td>{{item.nama}}</td>
-                                        <td>{{date(new Date(item.mulai))}}</td>
-                                        <td>{{date(new Date(item.akhir))}}</td>
+                                        <td>{{tanggal(item.tanggal)}}</td>
                                         <td>Rp. {{item.total}}</td>
-                                        @if(item.status_pembayaran)
+                                        @if(item.status)
                                           <td style="text-align:center">
-                                            <button class="btn btn-success" id="" type="button">Sudah Lunas</button>
+                                            <button class="btn btn-success" id="" type="button">Sudah Transaksi</button>
                                           </td>
                                         @else
                                         <td style="text-align:center">
-                                          @!component('component/modal/booking_aula/bayar',{
-                                            index : index + 1,
-                                            nomor : item.detail.nama,
-                                            mulai : tanggal(item.mulai),
-                                            akhir : tanggal(item.akhir),
-                                            total : item.total,
-                                            id : item.id
-                                          })
+                                          <td style="text-align:center">
+                                            <button class="btn btn-danger" id="" type="button">Belum Transaksi</button>
+                                          </td>
                                         </td>
                                         @endif
-                                        <td style="text-align:center">
+                                        {{--  <td style="text-align:center">
                                           <form action="{{route('booking-aula.hapus')}}" method="POST">
                                             <input type="hidden" name="id" id="id" value="{{item.id}}">
                                             <button class="btn btn-danger" id="" type="submit">Hapus</button>
                                           </form>
-                                        </td>
+                                        </td>  --}}
                                       </tr>
                                     @endeach
                                   </tbody>
@@ -155,36 +137,39 @@
     {{--  <script src="{{appUrl()}}/assets/js/theme-customizer/customizer.js"></script>  --}}
     <!-- login js-->
     <script>
-      const submit = document.querySelectorAll('#submit')
-      const form = document.querySelectorAll('#form')
-      const id = document.querySelectorAll('#id')
-      const total = document.querySelectorAll('#total')
-      const invoice = `{{route('resepsi.invoice')}}`
-      const route = `{{route('booking-aula.bayar')}}`
-      const path = `{{appUrl()}}/assets/BILL.xlsx`
+      const lain = document.querySelector('#lain')
+      const tambah = document.querySelector('#tambah')
+      const lainnya = document.querySelector('#lainnya')
 
-      submit.forEach((e,i) => {
-        e.addEventListener('click', res => {
-          console.log(i)
-          e.innerHTML = `
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-          `
-          // e.disabled = true
-          // console.log(total[i].value, check_in[i].value, check_out[i].value, kamar[i].value, id[i].value)
-          fetch(route, {
-            method: 'POST',
-            body: new FormData(form[i])
-          })
-          .then(res => res.json())
-          .then(data => {
-            fetch(invoice)
-            window.open(`${invoice}?fileName=${data.fileName}`, '_blank');
-            window.location.reload();
+      tambah.addEventListener('click', res => {
+        const value = lainnya.value
+        const text = lainnya.options[lainnya.selectedIndex].text
+        lain.innerHTML += `
+        <div class="row mt-2" id="item">
+            <input type="hidden" name="laporan[]" value="${value}">
+            <div class="col">
+                <span>${text}</span>
+            </div>
+            <div class="col">
+                <button class="btn btn-danger btn-xs" id="hapus" type="button"><span class="fa fa-close"></span></button>
+            </div>
+        </div>
+        `
+        getAddItem()
+      })
+
+      getAddItem()
+      function getAddItem(){
+        const item = document.querySelectorAll('#item')
+        const hapus = document.querySelectorAll('#hapus')
+
+        item.forEach((e,i) => {
+          hapus[i].addEventListener('click', () => {
+            console.log('click')
+            e.remove()
           })
         })
-      })
+      }
     </script>
     <!-- Plugin used-->
   </body>
