@@ -88,7 +88,7 @@ export default class Resepsi extends BaseModel {
     worksheet.getCell('L5').value = `: ${post.serial}`
     worksheet.getCell('L6').value = `: ${resepsi.no_ktp == null || resepsi.no_ktp == '' ? '' : resepsi.no_ktp}`
     worksheet.getCell('L7').value = `: ${resepsi.nama}`
-    worksheet.getCell('R7').value = `: ${kamar.nama_tipe}`
+    worksheet.getCell('R7').value = `${kamar.nama_tipe}`
     worksheet.getCell('L8').value = `: ${resepsi.alamat == null || resepsi.alamat == '' ? '' : resepsi.alamat}`
     worksheet.getCell('L9').value = `: ${await Resepsi.date(resepsi.check_out)}`
     worksheet.getCell('K12').value = `${await Resepsi.tanggal(resepsi.check_in)}`
@@ -99,9 +99,11 @@ export default class Resepsi extends BaseModel {
     worksheet.getCell('R12').value = `Rp. ${diskon}`
     worksheet.getCell('S12').value = `${resepsi.jumlah_tamu}`
     worksheet.getCell('T12').value = `Rp. ${(kamar.harga * hari) - diskon}`
-    worksheet.getCell('T14').value = `Rp. ${detail_item[0].harga * detail_item[0].jumlah}`
-    worksheet.getCell('T15').value = `Rp. ${resepsi.total}`
-    worksheet.getCell('L17').value = `${await Resepsi.terbilang(resepsi.total)}`
+    if (detail_item.length != 0) {
+      worksheet.getCell('T14').value = `Rp. ${detail_item[0].harga * detail_item[0].jumlah}`
+    } 
+    worksheet.getCell('T15').value = `Rp. ${post.total}`
+    worksheet.getCell('L17').value = `${await Resepsi.terbilang(post.total)}`
     worksheet.getCell('R18').value = `Bireun, ${await Resepsi.date(resepsi.check_out)}`
     worksheet.getCell('J23').value = `${resepsi.nama}`
     worksheet.getCell('R23').value = `${nama}`

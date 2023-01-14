@@ -24,7 +24,7 @@ export default class CheckOutsController {
     async post({request, response, session}) {
         const post = request.all()
         console.log(post)
-        const path = Application.publicPath('uploads/bill_kamar.xlsx')
+        const path = 'bill_kamar.xlsx'
         const resepsi : any = await Resepsi.query().where('id', post.id).first()
         const kamar : any = await Kamar.query().where('id', post.kamar).first()
         // console.log(resepsi.serialize())
