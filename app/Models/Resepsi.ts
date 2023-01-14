@@ -65,12 +65,12 @@ export default class Resepsi extends BaseModel {
     const oneDay = 24 * 60 * 60 * 1000
     const hari = (resepsi.check_out - resepsi.check_in) / oneDay
     // console.log(resepsi)
-    const item = resepsi.id_item.split(',')
-    const jumlah_item = resepsi.jumlah_item.split(',')
     let detail_item : any = []
     let diskon = (kamar.harga * hari) - post.total
     
-    if (item.lenght != 0) {
+    if (resepsi.id_item != null) {
+      const item = resepsi.id_item.split(',')
+      const jumlah_item = resepsi.jumlah_item.split(',')
       for(let i in item){
         const additional : any = await AdditionalItem.query().where('id', item[i]).first()
         detail_item[i] = additional.serialize()
@@ -82,6 +82,7 @@ export default class Resepsi extends BaseModel {
     
     //
     const wb = new ExcelJS.Workbook()
+    console.log(path)
     await wb.xlsx.readFile(path)
     const worksheet = wb.getWorksheet(26)
     worksheet.getCell('L5').value = `: ${post.serial}`
