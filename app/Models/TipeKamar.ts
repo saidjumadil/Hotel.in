@@ -33,7 +33,7 @@ export default class TipeKamar extends BaseModel {
   public tv: number
 
   @column()
-  public interior: number
+  public interior: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
