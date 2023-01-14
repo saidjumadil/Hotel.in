@@ -61,7 +61,7 @@ export default class LaporansController {
               .attach(Application.publicPath('uploads/rekap.xlsx'), {filename : fileName+'.xlsx'})
           })
 
-        console.log(posts)
+        // console.log(posts)
         // const create = await Report.create(post)
         if (true) {
             session.flash('status', {type: 'success', message: 'Laporan Berhasil Dikirim'})
