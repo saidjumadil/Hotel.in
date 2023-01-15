@@ -9,10 +9,10 @@ export default class extends BaseSchema {
       table.string('username').unique().notNullable()
       table.string('nama', 75).notNullable()
       table.string('password')
-      table.string('ktp', 20).notNullable()
+      table.string('ktp', 20)
       table.string('no_hp', 15)
       table.string('alamat')
-      table.string('email', 100).unique().notNullable()
+      table.string('email', 100).unique()
       table.integer('role', 1).notNullable().unsigned().references('id').inTable('roles')
 
       /**

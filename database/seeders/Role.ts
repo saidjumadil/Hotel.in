@@ -3,6 +3,7 @@ import Kamar from 'App/Models/Kamar'
 import Role from 'App/Models/Role'
 import TipeKamar from 'App/Models/TipeKamar'
 import User from 'App/Models/User'
+import md5 from 'crypto-js/md5';
 
 export default class extends BaseSeeder {
   public async run () {
@@ -17,12 +18,11 @@ export default class extends BaseSeeder {
     ])
 
     await User.create({
-      nama: 'Said Jumadil Akbar', 
-      password: '9154e0660e51297a4660b957e24154f4', 
-      no_hp: '081354132223', 
-      email: 's.jumadil.akbar@gmail.com',
-      role: 2,
-      username: '1174030609980005',
+      nama: 'Novita Sari', 
+      password: md5('admin').toString(), 
+      no_hp: '081354132223',
+      role: 1,
+      username: 'admin',
       ktp: '1174030609980005'
     })
 
