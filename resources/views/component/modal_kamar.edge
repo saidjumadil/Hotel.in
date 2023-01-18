@@ -76,7 +76,33 @@
                             <option value=""></option>
                         </select>
                     </div>
-                    <div id="additional"></div>
+                    <div id="additional">
+                        @if(listItem)
+                            @each(item in listItem)
+                                <div class="row" id="itemAdd">
+                                    <div class="col col-sm-5">
+                                        <label class="col-sm-12 col-form-label">Additonal Item</label>
+                                        <select class="form-control" name="id_item[]" id="item">
+                                            @each(i in addItem)
+                                            <option value={{i.id}}>{{i.nama}}</option>
+                                            {{--  @if(i.id == item.detail_item.id)
+                                                <option value={{i.id}} selected>{{i.nama}}</option>
+                                            @else
+                                            @endif  --}}
+                                            @endeach
+                                        </select>
+                                    </div>
+                                    <div class="col col-sm-5">
+                                        <label class="col-sm-12 col-form-label">Jumlah</label>
+                                        <input class="form-control" type="number" name="jumlah_item[]" id="jumlah" value="{{item.jumlah}}" placeholder="Jumlah Item">
+                                    </div>
+                                    <div class="col col-sm-2 d-flex align-items-end">
+                                    <button type="button" id="hapus" class="btn btn-danger btn-lg"><span class="icon-close"></span></button>
+                                    </div>
+                                </div>
+                            @endeach
+                        @endif
+                    </div>
                     <div class="col my-3 d-flex justify-content-center">
                         <button class="btn btn-primary btn-sm" id="addItem" type="button"><span class="fa fa-plus"></span>   Tambah Additional Item</button>
                     </div>

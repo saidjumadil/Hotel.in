@@ -13,6 +13,30 @@ export default class CekKamarsController {
             const resepsi : any = await Resepsi.query().where('kamar', kamar[item].id).andWhere('status_pembayaran', 0).first()
             detail_kamar[item] = kamar[item]
             detail_kamar[item]['detail'] = resepsi
+            if(resepsi){
+                if (resepsi.id_item != null) {
+                    const id_item = resepsi.id_item.split(',')
+                    const jumlah_item = resepsi.jumlah_item.split(',')
+                    detail_kamar[item]['addItem'] = []
+                    for(let i in id_item){
+                        const detail_item : any = await AdditionalItem.query().where('id', id_item[i]).first()
+                        const def_item = {
+                            detail_item : detail_item.serialize(),
+                            jumlah : jumlah_item[i]
+                        }
+                        detail_kamar[item]['addItem'].push(def_item)
+                    }        
+                }
+                else{
+                    detail_kamar[item]['addItem'] = false
+                }
+            }
+            else{
+                detail_kamar[item]['addItem'] = false
+            }
+            if (detail_kamar[item]['addItem']) {
+                console.log(detail_kamar[item])
+            }
         }
         const diskon = await Diskon.query()
         const addItem = await AdditionalItem.query()
