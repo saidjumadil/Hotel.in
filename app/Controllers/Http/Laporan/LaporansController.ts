@@ -29,46 +29,58 @@ export default class LaporansController {
         const post = request.all()
         let lainnya = []
         let lain : any = []
-
-        if (post.laporan) {
-            lainnya = lainnya.concat(post.laporan)
+        const cekLaporan = await Report.query().where('tanggal', post.tanggal).first()
+        if (!cekLaporan) {
+            if (post.laporan) {
+                lainnya = lainnya.concat(post.laporan)
+            }
+    
+            for(let item of lainnya){
+                const report : any = await Report.query().where('id', item).first()
+                lain.push(report.serialize())
+            }
+    
+            //hitung total
+            const total : any = await Resepsi.query().sum('total as total').where('status_pembayaran', 1).andWhere('check_out', post.tanggal).first()
+            post.total = total.total
+    
+            //create rekap
+            const rekap : any = await Resepsi.query().join('kamars', 'kamars.id', 'resepsis.kamar').where('check_out', post.tanggal).andWhere('status_pembayaran', 1)
+            const belum : any = await Resepsi.query().join('kamars', 'kamars.id', 'resepsis.kamar').andWhere('status_pembayaran', 0)
+            // console.log(rekap.map( e => e.serialize()))
+            await Report.createWorkBook(rekap.map( e => e.serialize()))
+    
+            const emailData = {post, rekap : rekap.map( e => e.serialize()), belum : belum.map(e => { e.serialize() }), lain}
+            const fileName = await Resepsi.date(new Date(post.tanggal))
+    
+            const kirimEmail = await Mail.send((message) => {
+                message
+                  .to('djarwal.app@gmail.com')
+                  .from(Env.get('SMTP_USERNAME'), Env.get('SMTP_PASSWORD'))
+                  .subject(`LAPORAN HARIAN TANGGAL ${fileName}`)
+                  .htmlView('email/konfirmasi', emailData)
+                  .attach(Application.publicPath('uploads/rekap.xlsx'), {filename : fileName+'.xlsx'})
+              })
+    
+            // console.log(posts)
+            const create = await Report.create(post)
+            if (kirimEmail) {
+                if (create) {
+                    session.flash('status', {type: 'success', message: 'Laporan Berhasil Dikirim'})
+                    return response.redirect('back')
+                } else {
+                    session.flash('status', {type: 'danger', message: 'Laporan Gagal Dikirim'})
+                    return response.redirect('back')
+                }
+            } else {
+                session.flash('status', {type: 'danger', message: 'Laporan Gagal Dikirim di Email'})
+                return response.redirect('back')
+            }
         }
-
-        for(let item of lainnya){
-            const report : any = await Report.query().where('id', item).first()
-            lain.push(report.serialize())
-        }
-
-        //hitung total
-        const total : any = await Resepsi.query().sum('total as total').where('status_pembayaran', 1).andWhere('check_out', post.tanggal).first()
-        post.total = total.total
-
-        //create rekap
-        const rekap : any = await Resepsi.query().join('kamars', 'kamars.id', 'resepsis.kamar').where('check_out', post.tanggal).andWhere('status_pembayaran', 1)
-        const belum : any = await Resepsi.query().join('kamars', 'kamars.id', 'resepsis.kamar').andWhere('status_pembayaran', 0)
-        // console.log(rekap.map( e => e.serialize()))
-        await Report.createWorkBook(rekap.map( e => e.serialize()))
-
-        const emailData = {post, rekap : rekap.map( e => e.serialize()), belum : belum.map(e => { e.serialize() }), lain}
-        const fileName = await Resepsi.date(new Date(post.tanggal))
-
-        const kirimEmail = await Mail.send((message) => {
-            message
-              .to('djarwal.app@gmail.com')
-              .from(Env.get('SMTP_USERNAME'), Env.get('SMTP_PASSWORD'))
-              .subject(`LAPORAN HARIAN TANGGAL ${fileName}`)
-              .htmlView('email/konfirmasi', emailData)
-              .attach(Application.publicPath('uploads/rekap.xlsx'), {filename : fileName+'.xlsx'})
-          })
-
-        // console.log(posts)
-        // const create = await Report.create(post)
-        if (true) {
-            session.flash('status', {type: 'success', message: 'Laporan Berhasil Dikirim'})
+        else{
+            session.flash('status', {type: 'danger', message: 'Laporan Sudah Pernah diBuat Sebelumnya'})
             return response.redirect('back')
-        } else {
-            session.flash('status', {type: 'danger', message: 'Laporan Gagal Dikirim'})
-            return response.redirect('back')
         }
+
     }
 }

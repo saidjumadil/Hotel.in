@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.date('tanggal')
       table.integer('status').defaultTo(0)
       table.integer('tipe')
-      table.integer('total')
+      table.integer('total').defaultTo(0)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

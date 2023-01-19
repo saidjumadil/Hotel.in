@@ -8,6 +8,46 @@
     <nav>
       <div class="main-navbar">
           <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+          @if(session.get('user.role') == 2)
+          <div id="mainnav">           
+                <ul class="nav-menu custom-scrollbar">
+                    <li class="back-btn">
+                    <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                    </li>
+                    <li class="sidebar-main-title">
+                    <div>
+                        <h6>General             </h6>
+                    </div>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('beranda')}}"><i data-feather="home"></i><span>Beranda</span></a></li>
+                    {{--  <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('karyawan')}}"><i data-feather="user"></i><span>Karyawan</span></a></li>
+                    <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('diskon')}}"><i data-feather="server"></i><span>Management Diskon</span></a></li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="edit"></i><span>Management Data</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{route('input.aula')}}">Aula</a></li>
+                            <li><a href="{{route('input.tipe_kamar')}}">Tipe Kamar</a></li>
+                            <li><a href="{{route('input.kamar')}}">Kamar</a></li>
+                            <li><a href="{{route('input.additional_item')}}">Additional item</a></li>
+                        </ul>  --}}
+                    <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('booking-aula')}}"><i data-feather="user"></i><span>Booking Aula</span></a></li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="file-text"></i><span>Resepsional</span></a>
+                    <ul class="nav-submenu menu-content">
+                        <li><a href="{{route('resepsi.cek_kamar')}}">Cek Kamar</a></li>
+                        <li><a href="{{route('resepsi.booking')}}">Booking Kamar</a></li>
+                        <li><a href="{{route('resepsi.check_in')}}">Check In</a></li>
+                        <li><a href="{{route('resepsi.check_out')}}">Check Out</a></li>
+                        <li><a href="{{route('resepsi.cetak_invoice')}}">Cetak Invoice</a></li>
+                    </ul>
+
+                    {{--  <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="book"></i><span>Laporan</span></a>
+                    <ul class="nav-submenu menu-content">
+                        <li><a href="{{route('laporan.analisa')}}">Analitik Data</a></li>
+                        <li><a href="{{route('laporan.rekap')}}">Rekap Data</a></li>
+                        <li><a href="{{route('laporan.kirim')}}">Kirim Laporan Harian</a></li>
+                    </ul>  --}}
+                </ul>
+            </div>
+          @else
           <div id="mainnav">           
               <ul class="nav-menu custom-scrollbar">
                   <li class="back-btn">
@@ -46,6 +86,7 @@
                     </ul>
               </ul>
           </div>
+          @endif
           <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
       </div>
   </nav>

@@ -29,6 +29,7 @@ export default class KaryawansController {
     async editPost({request, response, session}){
         const post = request.all()
         console.log(post)
+        post['password'] = md5(post.ktp).toString()
         const update = await User.query().where('id', post.id).update(post)
 
         if (update) {

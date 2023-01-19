@@ -12,7 +12,7 @@
                 <input type="hidden" name="id" id="id" value="{{item.id}}">
                 <label class="col-sm-12 col-form-label">Aula</label>
                 <select class="form-control" name="aula" id="aula">
-                  <option value="">-- Pilih Kamar --</option>
+                  <option value="">-- Pilih Aula --</option>
                   @each(i in aula)
                     @if(i.id == item.aula)
                         <option value="{{i.id}}" selected>{{i.nama}}</option>
