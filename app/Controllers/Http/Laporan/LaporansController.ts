@@ -38,6 +38,7 @@ export default class LaporansController {
             for(let item of lainnya){
                 const report : any = await Report.query().where('id', item).first()
                 lain.push(report.serialize())
+                await Report.query().where('id', item).update('status', 1)
             }
     
             //hitung total
@@ -62,8 +63,9 @@ export default class LaporansController {
                   .attach(Application.publicPath('uploads/rekap.xlsx'), {filename : fileName+'.xlsx'})
               })
     
-            // console.log(posts)
-            const create = await Report.create(post)
+            console.log(post)
+            const data = {tanggal : post.tanggal, status : post.status, total : post.total}
+            const create = await Report.create(data)
             if (kirimEmail) {
                 if (create) {
                     session.flash('status', {type: 'success', message: 'Laporan Berhasil Dikirim'})
