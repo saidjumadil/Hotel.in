@@ -63,7 +63,6 @@
                                           <th scope="col">Tanggal</th>
                                           <th scope="col">Total Pemasukan</th>
                                           <th scope="col">Status Transaksi</th>
-                                          <th scope="col"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -72,16 +71,14 @@
                                       <tr>
                                         <th scope="col">{{index + 1}}</th>
                                         <td>{{tanggal(item.tanggal)}}</td>
-                                        <td>Rp. {{item.total}}</td>
+                                        <td>Rp. {{tandaPemisahTitik(item.total)}}</td>
                                         @if(item.status)
                                           <td style="text-align:center">
                                             <button class="btn btn-success" id="" type="button">Sudah Transaksi</button>
                                           </td>
                                         @else
                                         <td style="text-align:center">
-                                          <td style="text-align:center">
-                                            <button class="btn btn-danger" id="" type="button">Belum Transaksi</button>
-                                          </td>
+                                          <button class="btn btn-danger" id="" type="button">Belum Transaksi</button>
                                         </td>
                                         @endif
                                         {{--  <td style="text-align:center">
