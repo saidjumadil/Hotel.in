@@ -48,10 +48,10 @@ export default class LaporansController {
             //create rekap
             const rekap : any = await Resepsi.query().join('kamars', 'kamars.id', 'resepsis.kamar').where('check_out', post.tanggal).andWhere('status_pembayaran', 1)
             const belum : any = await Resepsi.query().join('kamars', 'kamars.id', 'resepsis.kamar').andWhere('status_pembayaran', 0)
-            // console.log(rekap.map( e => e.serialize()))
             await Report.createWorkBook(rekap.map( e => e.serialize()))
-    
-            const emailData = {post, rekap : rekap.map( e => e.serialize()), belum : belum.map(e => { e.serialize() }), lain}
+            
+            const emailData = {post, rekap : rekap.map( e => e.serialize()), belum : belum.map(e => e.serialize()), lain}
+            console.log(emailData.belum)
             const fileName = await Resepsi.date(new Date(post.tanggal))
     
             const kirimEmail = await Mail.send((message) => {
@@ -63,7 +63,6 @@ export default class LaporansController {
                   .attach(Application.publicPath('uploads/rekap.xlsx'), {filename : fileName+'.xlsx'})
               })
     
-            console.log(post)
             const data = {tanggal : post.tanggal, status : post.status, total : post.total}
             const create = await Report.create(data)
             if (kirimEmail) {
