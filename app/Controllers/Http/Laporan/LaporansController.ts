@@ -56,16 +56,25 @@ export default class LaporansController {
     
             const kirimEmail = await Mail.send((message) => {
                 message
-                  .to('djarwal.app@gmail.com')
+                  .to('idris_azhar@yahoo.co.id')
                   .from(Env.get('SMTP_USERNAME'), Env.get('SMTP_PASSWORD'))
                   .subject(`LAPORAN HARIAN TANGGAL ${fileName}`)
                   .htmlView('email/konfirmasi', emailData)
                   .attach(Application.publicPath('uploads/rekap.xlsx'), {filename : fileName+'.xlsx'})
               })
+            
+            const kirimEmail2 = await Mail.send((message) => {
+            message
+                .to('nurjal_api@yahoo.co.id')
+                .from(Env.get('SMTP_USERNAME'), Env.get('SMTP_PASSWORD'))
+                .subject(`LAPORAN HARIAN TANGGAL ${fileName}`)
+                .htmlView('email/konfirmasi', emailData)
+                .attach(Application.publicPath('uploads/rekap.xlsx'), {filename : fileName+'.xlsx'})
+            })
     
             const data = {tanggal : post.tanggal, status : post.status, total : post.total}
             const create = await Report.create(data)
-            if (kirimEmail) {
+            if (kirimEmail && kirimEmail2) {
                 if (create) {
                     session.flash('status', {type: 'success', message: 'Laporan Berhasil Dikirim'})
                     return response.redirect('back')

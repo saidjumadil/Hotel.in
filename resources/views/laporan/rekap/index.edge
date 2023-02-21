@@ -253,7 +253,7 @@
       cari.addEventListener('click', res => {
         const mulai = document.querySelector('#mulai')
         const akhir = document.querySelector('#akhir')
-        console.log(jenis.value, mulai.value, akhir.value)
+        console.log(`${apiTable}?jenis=${jenis.value}&&mulai=${mulai.value}&&akhir=${akhir.value}`)
 
         fetch(`${apiTable}?jenis=${jenis.value}&&mulai=${mulai.value}&&akhir=${akhir.value}`)
           .then(res => res.json())
