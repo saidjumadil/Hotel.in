@@ -112,6 +112,73 @@ export default class Resepsi extends BaseModel {
     await wb.xlsx.writeFile(`./public/uploads/filename.xlsx`)
   }
 
+  public static async tes_cetak(data){
+    const wb = new ExcelJS.Workbook()
+
+    const sheet1 = wb.addWorksheet('Lembar 1')
+    const worksheet = wb.getWorksheet(1)
+    let row = 1
+    for(let item in data){
+      //Judul
+      worksheet.getCell('A' + row).value = item
+      row++
+      //kolom
+      worksheet.getCell('A' + row).value = "Nama Tipe"
+      worksheet.getCell('B' + row).value = "Nomor"
+      worksheet.getCell('C' + row).value = "Harga"
+
+      worksheet.getCell('A' + row).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      }
+      worksheet.getCell('B' + row).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      }
+      worksheet.getCell('C' + row).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      }
+      row++
+      //isi data
+      for(let set of data[item]){
+        worksheet.getCell('A' + row).value = set.nama_tipe
+        worksheet.getCell('B' + row).value = set.nomor
+        worksheet.getCell('C' + row).value = set.harga
+
+        worksheet.getCell('A' + row).border = {
+          top: {style:'thin'},
+          left: {style:'thin'},
+          bottom: {style:'thin'},
+          right: {style:'thin'}
+        }
+        worksheet.getCell('B' + row).border = {
+          top: {style:'thin'},
+          left: {style:'thin'},
+          bottom: {style:'thin'},
+          right: {style:'thin'}
+        }
+        worksheet.getCell('C' + row).border = {
+          top: {style:'thin'},
+          left: {style:'thin'},
+          bottom: {style:'thin'},
+          right: {style:'thin'}
+        }
+        
+        row++
+      }
+      row++
+    }
+
+    await wb.xlsx.writeFile(`./public/uploads/tes.xlsx`)
+  }
+
   public static date(tanggal){
     const bulan : any = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
     return `${tanggal.getDate()} ${bulan[tanggal.getMonth()]} ${tanggal.getFullYear()}`

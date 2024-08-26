@@ -109,6 +109,7 @@ Route.group(() => {
         //cetak invoice
         Route.get('cetak-invoice', 'Resepsi/CetakInvoicesController.index').as('cetak_invoice')
         Route.get('invoice', 'Resepsi/CetakInvoicesController.invoice').as('invoice')
+        Route.get('tes_cetak', 'Resepsi/CetakInvoicesController.tes_cetak').as('tes_cetak')
         Route.get('bill/:id/:kamar', 'Resepsi/CetakInvoicesController.bill').as('bill')
     }).prefix('resepsi').as('resepsi')
     

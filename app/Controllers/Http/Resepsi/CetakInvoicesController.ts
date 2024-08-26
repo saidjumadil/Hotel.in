@@ -45,4 +45,24 @@ export default class CetakInvoicesController {
         response.attachment(filePath, fileName+'.xlsx')
     }
 
+    async tes_cetak({response}){
+        const nama_kamar = await Kamar.query().groupBy('nama_tipe')
+        const kamar = await Kamar.query()
+        let data = {}
+        for(let item of nama_kamar){
+            data[item.nama_tipe] = []
+        }
+
+        for(let item of kamar){
+            data[item.nama_tipe].push(item)
+        }
+
+        await Resepsi.tes_cetak(data)
+        const fileName = `Oke`
+
+        const filePath = Application.publicPath('uploads/tes.xlsx')
+        console.log(filePath)
+        response.attachment(filePath, fileName+'.xlsx')
+    }
+
 }
